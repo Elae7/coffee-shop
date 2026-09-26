@@ -3,15 +3,26 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#f5eee3">
-    <meta name="description" content="Оформление заказа для самовывоза из кофейни-пекарни Крошка.">
+    <meta name="theme-color" content="#f7f1e7">
+    <meta name="description" content="Демо-оформление самовывоза из кофейни-пекарни «Крошка». Заказ не отправляется и не требует оплаты.">
+    <meta name="robots" content="noindex,follow">
     <title>Оформление заказа — Крошка</title>
+    <link rel="canonical" href="https://elae7.github.io/coffee-shop/order.html">
     <link rel="manifest" href="manifest.json">
     <link rel="icon" href="assets/icons/kroshka.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="assets/icons/kroshka-180.png">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Крошка">
+    <meta property="og:title" content="Демо-оформление заказа — Крошка">
+    <meta property="og:description" content="Демонстрация оформления самовывоза. Оплата и отправка заказа не выполняются.">
+    <meta property="og:url" content="https://elae7.github.io/coffee-shop/order.html">
+    <meta property="og:image" content="https://elae7.github.io/coffee-shop/assets/images/croissant-coffee.webp">
+    <meta property="og:image:alt" content="Круассан и кофе на завтрак">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <script src="menu-data.js" defer></script><script src="order-config.js" defer></script><script src="js_main1.js" defer></script><script src="order.js" defer></script>
+    <script src="menu-data.js" defer></script><script src="js_main1.js" defer></script><script src="order.js" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Перейти к содержимому</a>
@@ -21,7 +32,7 @@
       <div class="header-actions"><button class="cart-toggle header-cart" type="button" aria-current="page" aria-label="Открыть корзину">Корзина <span class="header-cart-count">0</span></button><button class="theme-toggle icon-button" type="button" aria-label="Включить тёмную тему" title="Сменить тему"><span aria-hidden="true">☾</span></button><button class="nav-toggle icon-button" type="button" aria-label="Открыть навигацию" aria-controls="main-navigation" aria-expanded="false"><span aria-hidden="true">☰</span></button></div>
     </header>
     <main id="main-content" class="page-main">
-      <section class="page-intro"><p class="eyebrow"><span class="eyebrow-dot"></span> ПОСЛЕДНИЙ ШАГ ДО КОФЕ</p><h1>Оформить <span>заказ.</span></h1><p>Оставьте контакт — соберём ваш заказ к выбранному времени.</p></section>
+      <section class="page-intro"><p class="eyebrow"><span class="eyebrow-dot"></span> ДЕМО-ОФОРМЛЕНИЕ</p><h1>Оформить <span>заказ.</span></h1><p>Проверьте, как работает оформление: этот заказ не будет передан в кофейню и оплата не списывается.</p></section>
       <section class="order-layout section-wrap">
         <div class="order-form-panel">
           <p class="eyebrow">КОНТАКТНЫЕ ДАННЫЕ</p>
@@ -33,7 +44,7 @@
             <p class="pickup-note"><strong>Самовывоз</strong><span>Москва, ул. Пекарская, 12 · ежедневно 8:00–21:00</span></p>
             <p class="form-message" role="status" aria-live="polite" hidden></p>
             <button class="button button-primary submit-order" type="submit" disabled>Оформить заказ <span aria-hidden="true">↗</span></button>
-            <p class="endpoint-note">Пока сайт работает в демо-режиме: заказ не отправляется владельцу. Реальную отправку можно включить позже через внешний endpoint.</p>
+            <p class="endpoint-note">Демо-режим: данные и история останутся только в этом браузере. Заказ не отправляется и оплата не производится.</p>
           </form>
         </div>
         <aside class="order-summary-panel" aria-labelledby="order-summary-title"><p class="eyebrow">ВАШ ВЫБОР</p><h2 id="order-summary-title">Ваш заказ</h2><ul class="order-summary-list"></ul><p class="order-empty" hidden>Корзина пока пуста. <a href="menu.html">Вернуться в меню ↗</a></p><div class="order-total"><span>Итого</span><strong>0 ₽</strong></div><a class="text-link" href="menu.html">Добавить ещё <span aria-hidden="true">↗</span></a></aside>

@@ -126,21 +126,21 @@
       document.dispatchEvent(new CustomEvent("kroshka:cart-cleared"));
     } catch (error) {
       console.error("Не удалось сохранить локальную историю заказа.", error);
-      showMessage("Заказ принят, но сохранить историю на этом устройстве не удалось.");
+      document.querySelector(".success-caption").textContent =
+        "Демо-заказ сформирован, но браузер не смог сохранить историю. Скопируйте текст заказа, чтобы не потерять его.";
     }
   }
 
-  function renderSuccess(order, demo) {
+  function renderSuccess(order) {
     completedOrder = order;
     document.querySelector(".order-layout").hidden = true;
     form.hidden = true;
     success.hidden = false;
-    successTitle.textContent = demo ? "Заказ сформирован в демо-режиме" : "Заказ собран!";
+    successTitle.textContent = "Заказ сформирован в демо-режиме";
     document.querySelector(".success-order-number").textContent = order.number;
     document.querySelector(".success-total").textContent = formatPrice(order.total);
-    document.querySelector(".success-caption").textContent = demo
-      ? "Для реальной отправки заказа владельцу позже подключите endpoint в order-config.js."
-      : "Ваш заказ отправлен. До встречи в «Крошке»!";
+    document.querySelector(".success-caption").textContent =
+      "Это демонстрация: заказ не отправлен в кофейню, а данные остались только в этом браузере.";
     saveCompletedOrder(order);
     renderSummary();
     renderHistory();
@@ -195,7 +195,7 @@
   form.addEventListener("change", updateSubmitState);
   document.addEventListener("kroshka:cart-change", renderSummary);
   document.querySelector(".copy-order").addEventListener("click", copyOrder);
-  form.addEventListener("submit", async (event) => {
+  form.addEventListener("submit", (event) => {
     event.preventDefault();
     validatePhone();
     if (!form.reportValidity() || getOrderItems().length === 0) {
@@ -203,30 +203,7 @@
       return;
     }
     const order = makeOrder();
-    const endpoint = window.KROSHKA_ORDER_ENDPOINT.trim();
-    if (!endpoint) {
-      renderSuccess(order, true);
-      return;
-    }
-
-    submitButton.disabled = true;
-    submitButton.textContent = "Отправляем…";
-    showMessage("");
-    try {
-      const response = await fetch(endpoint, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "Accept": "application/json" },
-        body: JSON.stringify({ ...order, subject: `Новый заказ ${order.number}`, message: order.message })
-      });
-      if (!response.ok) throw new Error(`Сервис ответил статусом ${response.status}.`);
-      renderSuccess(order, false);
-    } catch (error) {
-      showMessage("Не удалось отправить заказ. Корзина сохранена — попробуйте ещё раз позже.");
-      console.error("Ошибка отправки заказа.", error);
-    } finally {
-      submitButton.textContent = "Оформить заказ";
-      updateSubmitState();
-    }
+    renderSuccess(order);
   });
 
   renderSummary();

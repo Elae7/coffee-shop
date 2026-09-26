@@ -6,7 +6,7 @@
   --text: #30271f;
   --muted: #76695a;
   --line: #ddcfbb;
-  --accent: #b85f3d;
+  --accent: #a04b2f;
   --accent-ink: #fffaf4;
   --soft-accent: #f3dfd2;
   --good: #53734e;
@@ -42,7 +42,7 @@ button, input, select, textarea { font: inherit; }
 button, a { -webkit-tap-highlight-color: transparent; }
 a { color: inherit; text-decoration: none; }
 button { color: inherit; }
-button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
 ::selection { background: var(--accent); color: var(--accent-ink); }
 [hidden] { display: none !important; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; clip-path: inset(50%); }
@@ -278,6 +278,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .main-nav .favorites-count { display: inline-grid; min-width: 18px; height: 18px; margin-left: 3px; place-items: center; padding: 0 4px; border-radius: 50%; background: var(--soft-accent); color: var(--accent); font-size: 9px; }
 .product-photo { width: 100%; height: 100%; object-fit: cover; }
 .product-art:has(.product-photo) { background: var(--surface-raised); }
+.product-photo { width: 100%; height: 100%; min-height: inherit; object-fit: cover; }
 .product-actions { display: flex; align-items: center; justify-content: flex-end; gap: 6px; }
 .product-footer > p { grid-column: 1; grid-row: 1; }
 .product-footer .pairing-note { grid-column: 1; grid-row: 2; }
@@ -298,6 +299,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .cart-drawer-footer { flex: 0 0 auto; }
 
 .today-section { display: grid; grid-template-columns: minmax(0, .9fr) minmax(300px, 1.1fr); align-items: center; gap: 32px; margin-bottom: 70px; padding: 30px; border: 1px solid var(--line); border-radius: 12px; background: linear-gradient(110deg, var(--surface), var(--bg)); }
+.today-section { position: relative; }
+.today-food-sticker { position: absolute; z-index: 2; top: 16px; right: 18px; width: 58px; pointer-events: none; filter: drop-shadow(0 5px 7px rgb(0 0 0 / 16%)); transform: rotate(9deg); }
 .today-copy h2 { max-width: 380px; margin: 12px 0; font-family: Manrope, sans-serif; font-size: clamp(30px, 4vw, 43px); letter-spacing: -.05em; line-height: 1.12; }
 .today-copy h2 span { color: var(--accent); }
 .today-copy > p:last-child { max-width: 350px; margin: 0; color: var(--muted); font-size: 13px; line-height: 1.7; }
@@ -356,6 +359,52 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .offline-banner { position: sticky; z-index: 19; top: 72px; padding: 9px 15px; background: var(--soft-accent); color: var(--text); font-size: 11px; text-align: center; }
 .install-app { min-height: 38px; margin-top: 18px; font-size: 10px; }
 
+.home-bento { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 14px; margin-bottom: 76px; }
+.bento-interior, .bento-special, .bento-faq { position: relative; min-width: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 16px; }
+.bento-interior { min-height: 390px; grid-column: span 7; grid-row: span 2; display: flex; align-items: end; padding: 25px; background: var(--surface-raised); color: white; }
+.bento-interior::after { position: absolute; inset: 0; background: linear-gradient(0deg, rgb(25 20 16 / 82%), rgb(25 20 16 / 10%) 72%); content: ""; }
+.bento-interior > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.bento-interior-copy { position: relative; z-index: 1; max-width: 430px; }
+.bento-interior .eyebrow { color: #f3dfd2; }
+.bento-interior h2 { margin: 9px 0 17px; font-family: Manrope, sans-serif; font-size: clamp(28px, 3.5vw, 40px); letter-spacing: -.05em; line-height: 1.1; }
+.bento-interior .button { min-height: 46px; border-color: rgb(255 255 255 / 65%); background: rgb(30 24 19 / 42%); color: white; }
+.bento-photo-note { position: absolute; z-index: 1; top: 15px; right: 15px; padding: 6px 9px; border-radius: 99px; background: rgb(30 24 19 / 62%); color: white; font-size: 9px; }
+.bento-special { min-height: 188px; grid-column: span 5; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; padding: 22px; background: var(--soft-accent); }
+.bento-special > img { position: absolute; top: 18px; right: 17px; width: 82px; height: 82px; object-fit: contain; filter: drop-shadow(0 6px 6px rgb(0 0 0 / 12%)); }
+.bento-special .eyebrow { max-width: calc(100% - 72px); color: var(--accent); }
+.bento-special h2 { max-width: 290px; margin: 10px 0; font-family: Manrope, sans-serif; font-size: clamp(20px, 2.6vw, 27px); letter-spacing: -.04em; line-height: 1.15; }
+.bento-special > p:not(.eyebrow) { max-width: 320px; margin: 0 0 12px; color: var(--muted); font-size: 12px; line-height: 1.6; }
+.bento-faq { grid-column: span 5; padding: 19px 21px; background: var(--surface); }
+.bento-faq h2 { margin: 6px 0 10px; font-family: Manrope, sans-serif; font-size: 23px; letter-spacing: -.04em; }
+.bento-faq h2 span { color: var(--accent); }
+.bento-faq details { border-top: 1px solid var(--line); }
+.bento-faq summary { position: relative; min-height: 42px; padding: 12px 25px 10px 0; cursor: pointer; font-size: 11px; font-weight: 700; list-style: none; }
+.bento-faq summary::-webkit-details-marker { display: none; }
+.bento-faq summary::after { position: absolute; top: 9px; right: 2px; color: var(--accent); content: "+"; font-size: 17px; }
+.bento-faq details[open] summary::after { content: "−"; }
+.bento-faq details p { margin: 0 0 12px; color: var(--muted); font-size: 11px; line-height: 1.6; }
+.bento-faq h2 { color: var(--text); }
+.home-faq { padding-bottom: 64px; }
+.quest-icon img { width: 35px; height: 35px; object-fit: contain; }
+.story-illustration { overflow: hidden; }
+.story-illustration img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.story-illustration i { z-index: 1; padding: 5px 7px; border-radius: 4px; background: rgb(33 27 22 / 72%); color: white; }
+.icon-button { width: 44px; height: 44px; }
+.add-button { min-height: 44px; }
+.favorite-button { width: 44px; height: 44px; }
+.quick-view-button { min-height: 44px; }
+.category-tab { min-height: 44px; }
+.recommend-add, .cart-recommendation { min-height: 44px; }
+.combo-card .button, .quest-card .button, .visit-band-details .button { min-height: 44px; }
+.story-illustration::before { z-index: 1; }
+.not-found { display: flex; min-height: 100svh; flex-direction: column; align-items: flex-start; justify-content: center; width: min(760px, calc(100% - 40px)); margin: auto; padding: 50px 0; }
+.not-found > .brand { margin-bottom: 60px; }
+.not-found > .eyebrow { color: var(--accent); }
+.not-found h1 { max-width: 660px; margin: 16px 0; font-family: Manrope, sans-serif; font-size: clamp(43px, 7vw, 72px); letter-spacing: -.065em; line-height: 1.04; }
+.not-found h1 span { color: var(--accent); }
+.not-found > p:not(.eyebrow) { max-width: 500px; margin: 0; color: var(--muted); font-size: 15px; line-height: 1.7; }
+.not-found-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 25px; }
+
 @media (max-width: 900px) {
   .site-header { gap: 10px; padding-right: 22px; padding-left: 22px; }
   .main-nav { gap: 12px; font-size: 11px; }
@@ -366,6 +415,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .recommend-grid { grid-template-columns: 1fr; }
   .combo-grid { grid-template-columns: 1fr; }
   .favorites-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .bento-interior { grid-column: span 7; }
+  .bento-special, .bento-faq { grid-column: span 5; }
 }
 
 @media (max-width: 680px) {
@@ -559,6 +610,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   box-shadow: var(--shadow);
 }
 .hero-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.hero-food-sticker { position: absolute; z-index: 2; right: 14px; bottom: 18px; width: clamp(72px, 10vw, 118px); filter: drop-shadow(0 6px 8px rgb(0 0 0 / 20%)); transform: rotate(-12deg); }
 .home-hero .hero-art::after {
   position: absolute;
   inset: 0;
@@ -604,6 +656,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .visit-band .eyebrow, .visit-band-details p { color: #e0d9cb; }
 .visit-band h2 span { color: #e8c383; }
 .visit-band .button-primary { background: #e8c383; color: #30271f; }
+.visit-band .button-secondary { border-color: #e0d9cb; color: #fffaf2; }
+.visit-band .button-secondary:hover:not(:disabled) { background: rgb(255 255 255 / 12%); }
 
 @media (max-width: 900px) {
   .home-hero { min-height: 580px; grid-template-columns: minmax(0, 1fr) minmax(280px, .82fr); gap: 30px; padding: 40px; }
@@ -616,12 +670,21 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .home-hero .hero-description { font-size: 14px; }
   .home-hero .hero-art { position: relative; right: auto; bottom: auto; width: 100%; min-height: 330px; opacity: 1; border-radius: 17px; }
   .hero-photo-caption { bottom: 16px; left: 16px; width: 94px; height: 94px; font-size: 11px; }
+  .hero-food-sticker { right: 10px; bottom: 12px; width: 76px; }
   .caption-mark { font-size: 18px; }
   .hero-photo-note { top: 17px; right: 17px; font-size: 8px; }
   .popular-section { padding-top: 62px; padding-bottom: 55px; }
   .product-art { min-height: 130px; }
   .quest-card { align-items: center; }
   .visit-band { background: #384c3b; }
+  .home-bento { grid-template-columns: 1fr; gap: 10px; margin-bottom: 48px; }
+  .bento-interior { min-height: 310px; grid-column: auto; grid-row: auto; padding: 19px; }
+  .bento-interior h2 { font-size: 30px; }
+  .bento-special, .bento-faq { min-height: 0; grid-column: auto; padding: 19px; }
+  .bento-special { min-height: 180px; padding-right: 90px; }
+  .bento-special > img { top: 18px; right: 10px; width: 74px; height: 74px; }
+  .bento-faq h2 { font-size: 22px; }
+  .home-faq { padding-bottom: 45px; }
 }
 
 @media (max-width: 390px) {
@@ -630,4 +693,15 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .home-hero .hero-actions .button { width: 100%; }
   .hero-perks { display: grid; gap: 8px; }
   .home-hero .hero-art { min-height: 280px; }
+  .today-food-sticker { top: 12px; right: 12px; width: 47px; }
+}
+
+@media (max-width: 680px) {
+  .icon-button { width: 44px; height: 44px; }
+  .site-header button, .mobile-dock a, .mobile-dock button { min-height: 44px; }
+  .mobile-dock a, .mobile-dock button { min-width: 44px; }
+  .add-button, .favorite-button, .quick-view-button, .category-tab, .recommend-add, .cart-recommendation { min-height: 44px; }
+  .favorite-button { width: 44px; }
+  .combo-card .button, .quest-card .button, .visit-band-details .button, .hero-actions .button { min-height: 44px; }
+  .not-found > .brand { margin-bottom: 42px; }
 }

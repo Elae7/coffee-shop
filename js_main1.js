@@ -497,7 +497,7 @@
 
     function apply(value) {
       document.documentElement.dataset.theme = value;
-      document.querySelector('meta[name="theme-color"]')?.setAttribute("content", value === "dark" ? "#211b16" : "#f5eee3");
+      document.querySelector('meta[name="theme-color"]')?.setAttribute("content", value === "dark" ? "#211b16" : "#f7f1e7");
       toggle.setAttribute("aria-label", value === "dark" ? "Включить светлую тему" : "Включить тёмную тему");
       toggle.querySelector("span").textContent = value === "dark" ? "☼" : "☾";
     }
