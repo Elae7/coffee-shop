@@ -19,6 +19,8 @@ const categoryTabs = document.querySelectorAll(".category-tab");
 const productCards = document.querySelectorAll(".product-card");
 const noResults = document.querySelector(".no-results");
 const themeToggle = document.querySelector(".theme-toggle");
+const cartStorageKey = "kroshka-cart";
+const themeStorageKey = "kroshka-theme";
 
 function formatPrice(amount) {
   return `${amount.toLocaleString("ru-RU")} ₽`;
@@ -34,6 +36,117 @@ function showToast(message) {
     toast.classList.add("is-leaving");
     toast.addEventListener("animationend", () => toast.remove(), { once: true });
   }, 2600);
+}
+
+function restoreCart() {
+  let savedCart;
+  try {
+    savedCart = localStorage.getItem(cartStorageKey);
+  } catch {
+    showToast("Не удалось прочитать корзину из памяти браузера.");
+    return;
+  }
+
+  if (savedCart === null) return;
+
+  let entries;
+  try {
+    entries = JSON.parse(savedCart);
+  } catch {
+    showToast("Не удалось восстановить сохранённую корзину.");
+    return;
+  }
+
+  if (!Array.isArray(entries)) {
+    showToast("Не удалось восстановить сохранённую корзину.");
+    return;
+  }
+
+  let skippedEntries = false;
+  entries.forEach((entry) => {
+    if (
+      !Array.isArray(entry) ||
+      typeof entry[0] !== "string" ||
+      !Object.hasOwn(products, entry[0]) ||
+      !Number.isSafeInteger(entry[1]) ||
+      entry[1] < 1
+    ) {
+      skippedEntries = true;
+      return;
+    }
+
+    cart.set(entry[0], entry[1]);
+  });
+
+  if (skippedEntries) showToast("Некоторые товары из сохранённой корзины не удалось восстановить.");
+}
+
+function saveCart() {
+  try {
+    localStorage.setItem(cartStorageKey, JSON.stringify(Array.from(cart.entries())));
+  } catch {
+    showToast("Не удалось сохранить корзину в памяти браузера.");
+  }
+}
+
+function applyTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+  themeToggle.setAttribute(
+    "aria-label",
+    theme === "dark" ? "Включить светлую тему" : "Включить тёмную тему"
+  );
+  document.querySelector('meta[name="theme-color"]').content = theme === "dark" ? "#191511" : "#f2e7cf";
+}
+
+function restoreTheme() {
+  let theme = "dark";
+  try {
+    const savedTheme = localStorage.getItem(themeStorageKey);
+    if (savedTheme === "dark" || savedTheme === "light") theme = savedTheme;
+  } catch {
+    showToast("Не удалось прочитать сохранённую тему; включена тёмная.");
+  }
+  applyTheme(theme);
+}
+
+function saveTheme(theme) {
+  try {
+    localStorage.setItem(themeStorageKey, theme);
+  } catch {
+    showToast("Тема сменена, но сохранить её в браузере не удалось.");
+  }
+}
+
+function animatePickup(button) {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  const item = button.closest(".product-card")?.querySelector(".product-art-emoji");
+  const inventory = document.querySelector(".cart-count");
+  if (!item || !inventory) return;
+
+  const origin = button.getBoundingClientRect();
+  const destination = inventory.getBoundingClientRect();
+  const pickup = document.createElement("span");
+  pickup.className = "pickup-ghost";
+  pickup.setAttribute("aria-hidden", "true");
+  pickup.textContent = item.textContent;
+  pickup.style.left = `${origin.left + origin.width / 2}px`;
+  pickup.style.top = `${origin.top + origin.height / 2}px`;
+  document.body.append(pickup);
+
+  const offsetX = destination.left + destination.width / 2 - origin.left - origin.width / 2;
+  const offsetY = destination.top + destination.height / 2 - origin.top - origin.height / 2;
+  const animation = pickup.animate(
+    [
+      { transform: "translate(-50%, -50%) scale(1) rotate(0deg)", opacity: 1 },
+      {
+        transform: `translate(calc(-50% + ${offsetX}px), calc(-50% + ${offsetY}px)) scale(.25) rotate(180deg)`,
+        opacity: 0.2
+      }
+    ],
+    { duration: 620, easing: "cubic-bezier(.2,.8,.2,1)" }
+  );
+  animation.addEventListener("finish", () => pickup.remove(), { once: true });
 }
 
 function renderCart() {
@@ -99,13 +212,15 @@ function createQuantityButton(action, id, label, accessibleName) {
   return button;
 }
 
-function addToCart(id) {
+function addToCart(id, button) {
   if (!Object.hasOwn(products, id)) {
     showToast("Не удалось добавить этот товар.");
     return;
   }
 
+  animatePickup(button);
   cart.set(id, (cart.get(id) ?? 0) + 1);
+  saveCart();
   renderCart();
   showToast(`${products[id].name} — в корзине`);
 }
@@ -120,6 +235,7 @@ function changeQuantity(id, change) {
   } else {
     cart.set(id, nextQuantity);
   }
+  saveCart();
   renderCart();
 }
 
@@ -128,7 +244,7 @@ document.addEventListener("click", (event) => {
 
   const addButton = event.target.closest(".add-button");
   if (addButton) {
-    addToCart(addButton.dataset.productId);
+    addToCart(addButton.dataset.productId, addButton);
     return;
   }
 
@@ -162,23 +278,17 @@ categoryTabs.forEach((tab) => {
 
 themeToggle.addEventListener("click", () => {
   const nextTheme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
-  document.documentElement.dataset.theme = nextTheme;
-  themeToggle.setAttribute(
-    "aria-label",
-    nextTheme === "dark" ? "Включить светлую тему" : "Включить тёмную тему"
-  );
-  document.querySelector('meta[name="theme-color"]').content = nextTheme === "dark" ? "#1e211d" : "#f5f2e9";
+  saveTheme(nextTheme);
+  applyTheme(nextTheme);
 });
 
-if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-  document.documentElement.dataset.theme = "dark";
-  themeToggle.setAttribute("aria-label", "Включить светлую тему");
-  document.querySelector('meta[name="theme-color"]').content = "#1e211d";
-}
+restoreCart();
+restoreTheme();
 
 checkoutButton.addEventListener("click", () => {
   if (cart.size === 0) return;
   cart.clear();
+  saveCart();
   renderCart();
   showToast("Заказ принят! Будем ждать тебя в «Крошке».");
 });
