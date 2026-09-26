@@ -1,1 +1,0 @@
-window.KROSHKA_ORDER_ENDPOINT = "";

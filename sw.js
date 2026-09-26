@@ -1,4 +1,4 @@
-const CACHE_NAME = "kroshka-shell-v2";
+const CACHE_NAME = "kroshka-shell-v3";
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -7,13 +7,26 @@ const APP_SHELL = [
   "./about.html",
   "./visit.html",
   "./order.html",
+  "./404.html",
   "./style.css",
   "./menu-data.js",
-  "./order-config.js",
   "./js_main1.js",
   "./order.js",
   "./manifest.json",
-  "./assets/icons/kroshka.svg"
+  "./assets/icons/kroshka.svg",
+  "./assets/icons/kroshka-180.png",
+  "./assets/icons/kroshka-192.png",
+  "./assets/icons/kroshka-512.png",
+  "./assets/icons/food-croissant.svg",
+  "./assets/icons/food-coffee.svg",
+  "./assets/icons/food-cookie.svg",
+  "./assets/icons/food-dessert.svg",
+  "./assets/images/croissant-coffee.webp",
+  "./assets/images/latte.webp",
+  "./assets/images/cinnamon-roll.webp",
+  "./assets/images/chocolate-cookie.webp",
+  "./assets/images/breakfast.webp",
+  "./assets/images/cafe-interior.webp"
 ];
 
 self.addEventListener("install", (event) => {
@@ -47,6 +60,7 @@ self.addEventListener("fetch", (event) => {
         return response;
       }).catch(async () =>
         (await caches.match(request, { ignoreSearch: true })) ??
+        (await caches.match(new URL("./404.html", self.registration.scope).href)) ??
         (await caches.match(new URL("./index.html", self.registration.scope).href))
       )
     );
