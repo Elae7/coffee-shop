@@ -1,12 +1,12 @@
 const products = {
-  croissant: { name: "Круассан классический", price: 190 },
-  cinnamon: { name: "Улитка с корицей", price: 220 },
-  cookie: { name: "Печенье с шоколадом", price: 160 },
-  tart: { name: "Тарт с ягодами", price: 290 },
-  latte: { name: "Латте", price: 240 },
-  matcha: { name: "Матча-тоник", price: 310 },
-  cocoa: { name: "Какао с маршмеллоу", price: 260 },
-  toast: { name: "Тост с авокадо", price: 390 }
+  croissant: { name: "Круассан классический", price: 190, icon: "🥐" },
+  cinnamon: { name: "Улитка с корицей", price: 220, icon: "🍥" },
+  cookie: { name: "Печенье с шоколадом", price: 160, icon: "🍪" },
+  tart: { name: "Тарт с ягодами", price: 290, icon: "🍓" },
+  latte: { name: "Латте", price: 240, icon: "☕" },
+  matcha: { name: "Матча-тоник", price: 310, icon: "🍵" },
+  cocoa: { name: "Какао с маршмеллоу", price: 260, icon: "🍫" },
+  toast: { name: "Тост с авокадо", price: 390, icon: "🥑" }
 };
 
 const cart = new Map();
@@ -19,6 +19,12 @@ const categoryTabs = document.querySelectorAll(".category-tab");
 const productCards = document.querySelectorAll(".product-card");
 const noResults = document.querySelector(".no-results");
 const themeToggle = document.querySelector(".theme-toggle");
+const headerCartCount = document.querySelector(".header-cart-count");
+const navToggle = document.querySelector(".nav-toggle");
+const mainNavigation = document.querySelector(".main-nav");
+const questDialog = document.querySelector(".quest-dialog");
+const questOrderItems = document.querySelector(".quest-order-items");
+const questOrderTotal = document.querySelector(".quest-order-total strong");
 const cartStorageKey = "kroshka-cart";
 const themeStorageKey = "kroshka-theme";
 
@@ -120,7 +126,8 @@ function saveTheme(theme) {
 function animatePickup(button) {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-  const item = button.closest(".product-card")?.querySelector(".product-art-emoji");
+  const item = button.closest(".product-card")?.querySelector(".product-art-emoji")
+    ?? button.closest(".recommend-card")?.querySelector(".recommend-art");
   const inventory = document.querySelector(".cart-count");
   if (!item || !inventory) return;
 
@@ -156,6 +163,8 @@ function renderCart() {
 
   cartCount.textContent = String(totalItems);
   cartCount.setAttribute("aria-label", `Товаров в корзине: ${totalItems}`);
+  headerCartCount.textContent = String(totalItems);
+  headerCartCount.setAttribute("aria-label", `Товаров в заказе: ${totalItems}`);
   cartTotal.textContent = formatPrice(totalPrice);
   checkoutButton.disabled = items.length === 0;
 
@@ -175,13 +184,17 @@ function renderCart() {
 
     const info = document.createElement("div");
     info.className = "cart-row-info";
+    const itemIcon = document.createElement("span");
+    itemIcon.className = "cart-item-icon";
+    itemIcon.setAttribute("aria-hidden", "true");
+    itemIcon.textContent = product.icon;
     const name = document.createElement("div");
     name.className = "cart-row-name";
-    name.textContent = product.name;
+    name.textContent = `${product.name} ×${quantity}`;
     const price = document.createElement("div");
     price.className = "cart-row-price";
     price.textContent = `${formatPrice(product.price)} / шт.`;
-    info.append(name, price);
+    info.append(itemIcon, name, price);
 
     const itemTotal = document.createElement("span");
     itemTotal.className = "cart-row-total";
@@ -190,11 +203,10 @@ function renderCart() {
     const controls = document.createElement("div");
     controls.className = "quantity-control";
     controls.setAttribute("aria-label", `Количество: ${product.name}`);
-    controls.append(
-      createQuantityButton("decrease", id, "−", `Уменьшить количество: ${product.name}`),
-      Object.assign(document.createElement("span"), { textContent: String(quantity) }),
-      createQuantityButton("increase", id, "+", `Увеличить количество: ${product.name}`)
-    );
+    controls.append(createQuantityButton("decrease", id, "−", `Уменьшить количество: ${product.name}`));
+    const quantityText = document.createElement("span");
+    quantityText.textContent = String(quantity);
+    controls.append(quantityText, createQuantityButton("increase", id, "+", `Увеличить количество: ${product.name}`));
     row.append(info, itemTotal, controls);
     fragment.append(row);
   }
@@ -225,6 +237,20 @@ function addToCart(id, button) {
   showToast(`${products[id].name} — в корзине`);
 }
 
+function addRecommendation(combo, button) {
+  const productIds = combo.split(",").map((id) => id.trim());
+  if (productIds.length === 0 || productIds.some((id) => !Object.hasOwn(products, id))) {
+    showToast("Не удалось собрать это сочетание.");
+    return;
+  }
+
+  animatePickup(button);
+  productIds.forEach((id) => cart.set(id, (cart.get(id) ?? 0) + 1));
+  saveCart();
+  renderCart();
+  showToast("Сочетание добавлено в заказ!");
+}
+
 function changeQuantity(id, change) {
   const currentQuantity = cart.get(id);
   if (currentQuantity === undefined) return;
@@ -239,6 +265,23 @@ function changeQuantity(id, change) {
   renderCart();
 }
 
+function closeMobileNavigation() {
+  navToggle.setAttribute("aria-expanded", "false");
+  navToggle.setAttribute("aria-label", "Открыть меню навигации");
+  mainNavigation.classList.remove("is-open");
+}
+
+navToggle.addEventListener("click", () => {
+  const isOpen = navToggle.getAttribute("aria-expanded") !== "true";
+  navToggle.setAttribute("aria-expanded", String(isOpen));
+  navToggle.setAttribute("aria-label", isOpen ? "Закрыть меню навигации" : "Открыть меню навигации");
+  mainNavigation.classList.toggle("is-open", isOpen);
+});
+
+mainNavigation.addEventListener("click", (event) => {
+  if (event.target instanceof Element && event.target.closest("a")) closeMobileNavigation();
+});
+
 document.addEventListener("click", (event) => {
   if (!(event.target instanceof Element)) return;
 
@@ -248,11 +291,21 @@ document.addEventListener("click", (event) => {
     return;
   }
 
+  const recommendationButton = event.target.closest("[data-combo]");
+  if (recommendationButton) {
+    addRecommendation(recommendationButton.dataset.combo, recommendationButton);
+    return;
+  }
+
   const quantityButton = event.target.closest("[data-cart-action]");
   if (quantityButton) {
     const change = quantityButton.dataset.cartAction === "increase" ? 1 : -1;
     changeQuantity(quantityButton.dataset.productId, change);
   }
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") closeMobileNavigation();
 });
 
 categoryTabs.forEach((tab) => {
@@ -267,9 +320,18 @@ categoryTabs.forEach((tab) => {
     });
 
     productCards.forEach((card) => {
+      const wasVisible = !card.hidden;
       const isVisible = category === "all" || card.dataset.category === category;
       card.hidden = !isVisible;
-      if (isVisible) visibleCount += 1;
+      if (isVisible) {
+        visibleCount += 1;
+        if (!wasVisible && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          card.animate(
+            [{ opacity: 0, transform: "translateY(8px)" }, { opacity: 1, transform: "translateY(0)" }],
+            { duration: 260, easing: "ease-out" }
+          );
+        }
+      }
     });
 
     noResults.hidden = visibleCount > 0;
@@ -287,10 +349,34 @@ restoreTheme();
 
 checkoutButton.addEventListener("click", () => {
   if (cart.size === 0) return;
+  const fragment = document.createDocumentFragment();
+  let total = 0;
+
+  for (const [id, quantity] of cart) {
+    const product = products[id];
+    total += product.price * quantity;
+    const item = document.createElement("li");
+    item.textContent = `${product.icon} ${product.name} ×${quantity}`;
+    fragment.append(item);
+  }
+
+  questOrderItems.replaceChildren(fragment);
+  questOrderTotal.textContent = formatPrice(total);
+  questDialog.showModal();
+});
+
+document.querySelector(".quest-close").addEventListener("click", () => questDialog.close());
+
+document.querySelector(".quest-continue").addEventListener("click", () => {
   cart.clear();
   saveCart();
   renderCart();
-  showToast("Заказ принят! Будем ждать тебя в «Крошке».");
+  questDialog.close();
+  showToast("Заказ собран! До встречи в «Крошке».");
+});
+
+questDialog.addEventListener("click", (event) => {
+  if (event.target === questDialog) questDialog.close();
 });
 
 renderCart();

@@ -8,7 +8,7 @@
     <title>Крошка — кофейня-пекарня</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Ruslan+Display&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Russo+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="js_main1.js" defer></script>
   </head>
@@ -17,18 +17,26 @@
     <header class="site-header">
       <a class="brand" href="#top" aria-label="Крошка — на главную">
         <span class="brand-mark" aria-hidden="true">к</span>
-        <span>крошка<span class="brand-period">.</span></span>
+        <span>КРОШКА</span>
       </a>
-      <nav class="main-nav" aria-label="Основная навигация">
+      <nav class="main-nav" id="main-navigation" aria-label="Основная навигация">
+        <a href="#top" aria-current="page">Главная</a>
         <a href="#menu">Меню</a>
         <a href="#story">О нас</a>
         <a href="#visit">Как найти</a>
       </nav>
       <div class="header-actions">
-        <a class="header-order" href="#menu">Выбрать вкусное <span aria-hidden="true">↗</span></a>
+        <a class="header-order" href="#cart-title" aria-label="Перейти к заказу">
+          <svg class="header-cart-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h2V3h2V1h6v2h2v2h2v3h2v14H3V8h2zm4 2v2h2V7zm4 0v2h2V7zm-5 6v6h3v-6zm5 0v6h3v-6z"/></svg>
+          <span>Корзина</span><span class="header-cart-count" aria-label="Товаров в заказе">0</span>
+        </a>
         <button class="theme-toggle icon-button" type="button" aria-label="Включить светлую тему" title="Сменить тему">
           <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 1h4v4h-4zM10 19h4v4h-4zM1 10h4v4H1zM19 10h4v4h-4zM6 6h3v3H6zM15 6h3v3h-3zM6 15h3v3H6zM15 15h3v3h-3zM9 8h6v8H9z"/></svg>
           <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 1h5v4h3v5h2v6h-3v4h-5v3h-6v-3H6v-4H3v-7h4V5h4V2h3zM14 5v4h-3v5H8v4h4v2h5v-3h3v-5h-4V9h-4z"/></svg>
+        </button>
+        <button class="nav-toggle icon-button" type="button" aria-label="Открыть меню навигации" aria-controls="main-navigation" aria-expanded="false">
+          <svg class="nav-icon nav-icon-open" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 4h14v3H3zm0 5h14v3H3zm0 5h14v3H3z"/></svg>
+          <svg class="nav-icon nav-icon-close" viewBox="0 0 20 20" aria-hidden="true"><path d="m4 2 6 6 6-6 2 2-6 6 6 6-2 2-6-6-6 6-2-2 6-6-6-6z"/></svg>
         </button>
       </div>
     </header>
@@ -36,31 +44,33 @@
     <main id="top">
       <section class="hero" aria-labelledby="hero-title">
         <div class="hero-copy">
-          <p class="eyebrow"><span class="eyebrow-dot"></span> КОФЕЙНЯ-ПЕКАРНЯ У ДОМА</p>
-          <h1 id="hero-title">Тепло<br>в каждом <span>кусочке<svg viewBox="0 0 310 17" preserveAspectRatio="none" aria-hidden="true"><path d="M4 12C64 3 196 1 306 9"/></svg></span></h1>
-          <p class="hero-description">Свежая выпечка, медленный кофе и место, где можно выдохнуть. Заходи просто так — мы уже скучали.</p>
+          <p class="eyebrow"><span class="eyebrow-dot"></span> КОФЕЙНЯ-БУЛОЧНАЯ · ЛОКАЦИЯ: КРОШКА</p>
+          <h1 id="hero-title">КРОШКА</h1>
+          <p class="hero-description">Кофейня-булочная для тех, кто отправился за вкусным приключением.</p>
+          <p class="hero-flavors">Свежая выпечка <span>·</span> горячий кофе <span>·</span> завтраки</p>
           <div class="hero-actions">
-            <a class="button button-primary" href="#menu">Открыть меню <span aria-hidden="true">↘</span></a>
-            <span class="hero-hours"><span aria-hidden="true">✳</span> Сегодня печём с 8:00</span>
+            <a class="button button-primary" href="#menu"><span aria-hidden="true">▦</span> Открыть меню <span aria-hidden="true">↘</span></a>
+            <a class="button button-secondary" href="#cart-title"><span aria-hidden="true">▣</span> Собрать заказ</a>
           </div>
-          <div class="hero-social-proof">
-            <div class="avatar-stack" aria-hidden="true"><span>М</span><span>А</span><span>К</span></div>
-            <p><strong>4.9 из 5</strong><br>по мнению соседей</p>
+          <div class="hero-quest-panel">
+            <div class="tavern-status"><span></span><strong>Выпечка готовится</strong><small>печь тёплая · кофе свежий</small></div>
+            <div class="daily-quest"><span class="quest-icon" aria-hidden="true">✦</span><p><small>КВЕСТ ДНЯ</small><strong>Найти идеальный круассан</strong></p><span class="quest-reward">+ настроение</span></div>
           </div>
         </div>
         <div class="hero-art" aria-label="Свежая выпечка и кофе">
-          <div class="hero-sunburst" aria-hidden="true">СДЕЛАНО<br>С ЛЮБОВЬЮ <span>♥</span></div>
+          <div class="hero-sunburst" aria-hidden="true">ТЁПЛАЯ<br>ЛОКАЦИЯ <span>✦</span></div>
           <div class="hero-blob"></div>
           <div class="hero-cup" aria-hidden="true">
             <span class="cup-steam steam-one"></span><span class="cup-steam steam-two"></span>
             <span class="cup-emoji">☕</span>
-            <span class="cup-label">ещё<br>глоточек?</span>
+            <span class="cup-label">согревает<br>в пути</span>
           </div>
           <div class="hero-croissant" aria-hidden="true">🥐</div>
+          <span class="hero-art-tile tile-one" aria-hidden="true"></span><span class="hero-art-tile tile-two" aria-hidden="true"></span><span class="hero-art-tile tile-three" aria-hidden="true"></span>
           <div class="hero-sparkle sparkle-one" aria-hidden="true">✳</div>
           <div class="hero-sparkle sparkle-two" aria-hidden="true">✦</div>
           <div class="hero-sticker" aria-hidden="true"><span>100%</span> тесто<br>на масле</div>
-          <span class="hero-art-caption">Маленькое счастье<br>каждое утро</span>
+          <span class="hero-art-caption">Свежая выпечка<br>из печи</span>
         </div>
         <a class="scroll-cue" href="#menu" aria-label="Прокрутить к меню"><span>ЛИСТАЙ ЗА ВКУСНЫМ</span><b aria-hidden="true">↓</b></a>
       </section>
@@ -138,28 +148,41 @@
           </div>
 
           <aside class="cart-panel" aria-labelledby="cart-title">
-            <div class="cart-heading"><div><p class="eyebrow">ТВОЙ ВЫБОР</p><h2 id="cart-title">Корзина <span class="cart-count" aria-label="Товаров в корзине">0</span></h2></div><span class="cart-bag" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M5 5h2V3h2V1h2v2h2v2h2v3h2v10H3V8h2zm2 2v2h2V7zm4 0v2h2V7zm-4 5v3h2v-3zm4 0v3h2v-3z"/></svg></span></div>
+            <div class="cart-heading"><div><p class="eyebrow">ПРЕДМЕТЫ В ПУТИ</p><h2 id="cart-title">Мой заказ <span class="cart-count" aria-label="Товаров в заказе">0</span></h2></div><span class="cart-bag" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M5 5h2V3h2V1h2v2h2v2h2v3h2v10H3V8h2zm2 2v2h2V7zm4 0v2h2V7zm-4 5v3h2v-3zm4 0v3h2v-3z"/></svg></span></div>
             <div class="cart-items" aria-live="polite">
               <div class="cart-empty"><span class="empty-icon" aria-hidden="true">🥐</span><p>Пока тут крошки.</p><span>Добавь что-нибудь вкусное!</span></div>
             </div>
             <div class="cart-summary">
               <div class="cart-subtotal"><span>Итого</span><strong>0 ₽</strong></div>
-              <button class="checkout-button" type="button" disabled>Заказать <span aria-hidden="true">↗</span></button>
+              <button class="checkout-button" type="button" disabled>Оформить заказ <span aria-hidden="true">↗</span></button>
               <p class="cart-hint">Заказ для самовывоза в кофейне</p>
             </div>
           </aside>
         </div>
       </section>
 
+      <section class="recommend-section section-wrap" aria-labelledby="recommend-title">
+        <div class="section-heading recommendation-heading">
+          <div><p class="eyebrow"><span class="eyebrow-dot"></span> ПОДСКАЗКИ ТАВЕРНЫ</p><h2 id="recommend-title">Рекомендуем <span>исследовать.</span></h2></div>
+          <div class="flavor-level"><span>Уровень вкусности</span><div aria-label="Уровень вкусности: 8 из 10"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><strong>08 / 10</strong></div>
+        </div>
+        <div class="recommend-grid">
+          <article class="recommend-card"><span class="recommend-art" aria-hidden="true">🥐 <i>✦</i></span><div><p class="eyebrow">ПАРА ПУТНИКА</p><h3>Круассан + латте</h3><span>Золотистая слойка, кофе с молочной пеной.</span></div><button type="button" class="recommend-add" data-combo="croissant,latte" aria-label="Добавить Круассан и Латте в заказ">430 ₽ <span aria-hidden="true">+</span></button></article>
+          <article class="recommend-card"><span class="recommend-art" aria-hidden="true">🍥 <i>✦</i></span><div><p class="eyebrow">ТЁПЛЫЙ БОНУС</p><h3>Улитка + какао</h3><span>Корица, горячий шоколад и немного уюта.</span></div><button type="button" class="recommend-add" data-combo="cinnamon,cocoa" aria-label="Добавить Улитку и Какао в заказ">480 ₽ <span aria-hidden="true">+</span></button></article>
+          <article class="recommend-card"><span class="recommend-art" aria-hidden="true">🥑 <i>✦</i></span><div><p class="eyebrow">ЗАВТРАК ГЕРОЯ</p><h3>Тост + латте</h3><span>Сытный завтрак перед новым приключением.</span></div><button type="button" class="recommend-add" data-combo="toast,latte" aria-label="Добавить Тост и Латте в заказ">630 ₽ <span aria-hidden="true">+</span></button></article>
+        </div>
+        <aside class="quest-note"><span class="quest-note-icon" aria-hidden="true">✧</span><p><small>МИНИ-КВЕСТ</small><strong>Найди идеальный завтрак</strong><span>Награда: хорошее настроение и горячий кофе.</span></p><span class="quest-note-reward">Задание принято</span></aside>
+      </section>
+
       <section class="story-section" id="story">
-        <div class="story-illustration" aria-hidden="true"><div class="story-roundel">медленно<br>значит<br>вкусно <span>✳</span></div><span class="story-bread">🍞</span><span class="story-flower">✿</span></div>
-        <div class="story-copy"><p class="eyebrow"><span class="eyebrow-dot"></span> НЕМНОГО О НАС</p><h2>Не гонимся<br>за <span>идеальным.</span></h2><p>Мы просто встаём пораньше, замешиваем тесто руками и варим кофе так, как любим сами. «Крошка» — это маленькое место для больших выдохов.</p><a class="text-link" href="#visit">Загляни в гости <span aria-hidden="true">↗</span></a></div>
+        <div class="story-illustration" aria-hidden="true"><div class="story-roundel">медленно<br>значит<br>вкусно <span>✳</span></div><span class="story-bread">🍞</span><span class="story-flower">✿</span><span class="story-lantern">✦</span></div>
+        <div class="story-copy"><p class="eyebrow"><span class="eyebrow-dot"></span> НЕМНОГО О НАС</p><h2>О <span>Крошке.</span></h2><p>Здесь начинается маленькое вкусное приключение. «Крошка» — уютная кофейня-булочная со свежей выпечкой, горячим кофе и завтраками. Заходи передохнуть и набраться сил в пути.</p><a class="text-link" href="#visit">Загляни в гости <span aria-hidden="true">↗</span></a></div>
       </section>
 
       <section class="visit-section section-wrap" id="visit">
-        <div><p class="eyebrow"><span class="eyebrow-dot"></span> МЫ РЯДОМ</p><h2>Забегай<br>на <span>огонёк.</span></h2></div>
+        <div><p class="eyebrow"><span class="eyebrow-dot"></span> ЛОКАЦИЯ ОБНАРУЖЕНА</p><h2>Как найти<br><span>Крошку.</span></h2></div>
         <div class="visit-details"><p>Тихая улица, хороший кофе<br>и свободный столик у окна.</p><a href="https://maps.google.com/?q=Москва+ул.+Пекарская+12" target="_blank" rel="noreferrer">Москва, ул. Пекарская, 12 <span aria-hidden="true">↗</span></a><span>Каждый день · 8:00 — 21:00</span></div>
-        <div class="visit-doodle" aria-hidden="true">до встречи <span>☺</span></div>
+        <div class="game-map" role="img" aria-label="Схематичная карта пути к кофейне"><span class="map-road map-road-one"></span><span class="map-road map-road-two"></span><span class="map-block map-block-one"></span><span class="map-block map-block-two"></span><span class="map-block map-block-three"></span><span class="map-pin">✦<small>КРОШКА</small></span><span class="map-location">ЛОКАЦИЯ · КРОШКА</span></div>
       </section>
     </main>
 
@@ -169,5 +192,17 @@
       <span>Сделано с крошечной любовью © 2026</span>
     </footer>
     <div class="toast-region" role="status" aria-live="polite"></div>
+    <dialog class="quest-dialog" aria-labelledby="quest-dialog-title">
+      <div class="quest-window">
+        <button class="quest-close icon-button" type="button" aria-label="Закрыть окно заказа">×</button>
+        <span class="quest-seal" aria-hidden="true">✦</span>
+        <p class="eyebrow"><span class="eyebrow-dot"></span> СООБЩЕНИЕ ИЗ ТАВЕРНЫ</p>
+        <h2 id="quest-dialog-title">Квест выполнен!</h2>
+        <p class="quest-dialog-intro">Ваш заказ собран.</p>
+        <ul class="quest-order-items"></ul>
+        <div class="quest-order-total"><span>Итого</span><strong></strong></div>
+        <button class="quest-continue button button-primary" type="button">Продолжить приключение <span aria-hidden="true">↗</span></button>
+      </div>
+    </dialog>
   </body>
 </html>
