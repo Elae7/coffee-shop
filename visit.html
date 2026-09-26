@@ -6,6 +6,8 @@
     <meta name="theme-color" content="#211b16">
     <meta name="description" content="Адрес и часы работы кофейни-пекарни Крошка в Москве.">
     <title>Как найти — Крошка</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="assets/icons/kroshka.svg" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
@@ -15,7 +17,7 @@
     <a class="skip-link" href="#main-content">Перейти к содержимому</a>
     <header class="site-header">
       <a class="brand" href="index.html" aria-label="Крошка — на главную"><span class="brand-mark" aria-hidden="true">к</span><span>крошка<span class="brand-period">.</span></span></a>
-      <nav class="main-nav" id="main-navigation" aria-label="Основная навигация"><a href="index.html">Главная</a><a href="menu.html">Меню</a><a href="about.html">О нас</a><a href="visit.html" aria-current="page">Как найти</a></nav>
+      <nav class="main-nav" id="main-navigation" aria-label="Основная навигация"><a href="index.html">Главная</a><a href="menu.html">Меню</a><a href="favorites.html">Избранное <span class="favorites-count" aria-label="Избранных товаров: 0">0</span></a><a href="about.html">О нас</a><a href="visit.html" aria-current="page">Как найти</a></nav>
       <div class="header-actions"><button class="cart-toggle header-cart" type="button" aria-label="Открыть корзину">Корзина <span class="header-cart-count">0</span></button><button class="theme-toggle icon-button" type="button" aria-label="Включить светлую тему" title="Сменить тему"><span aria-hidden="true">☼</span></button><button class="nav-toggle icon-button" type="button" aria-label="Открыть навигацию" aria-controls="main-navigation" aria-expanded="false"><span aria-hidden="true">☰</span></button></div>
     </header>
     <main id="main-content" class="page-main">
@@ -27,8 +29,13 @@
         </div>
         <div class="map-card" role="img" aria-label="Схематичная карта с отметкой кофейни Крошка"><span class="map-road map-road-one"></span><span class="map-road map-road-two"></span><span class="map-block map-block-one"></span><span class="map-block map-block-two"></span><span class="map-pin" aria-hidden="true">✦<small>КРОШКА</small></span><span class="map-caption">МОСКВА · УЛ. ПЕКАРСКАЯ, 12</span></div>
       </section>
+      <section class="faq-section section-wrap" aria-labelledby="visit-faq-title">
+        <div class="section-heading"><div><p class="eyebrow">ПЛАНИРУЙТЕ ВИЗИТ</p><h2 id="visit-faq-title">Коротко о <span>важном.</span></h2></div></div>
+        <div class="faq-list"><details><summary>Во сколько вы открыты?</summary><p>Каждый день с 8:00 до 21:00.</p></details><details><summary>Можно ли забрать заказ с собой?</summary><p>Да, на сайте можно собрать заказ для самовывоза. Сейчас checkout работает в демо-режиме и не отправляет заказ в кофейню.</p></details></div>
+      </section>
       <section class="visit-band section-wrap"><div><p class="eyebrow">СНАЧАЛА ВЫБЕРИТЕ ЛЮБИМОЕ</p><h2>Заказ будет ждать <span>вас.</span></h2></div><div class="visit-band-details"><p>Самовывоз из кофейни.<br>Оплата на месте.</p><a class="button button-secondary" href="menu.html">Открыть меню <span aria-hidden="true">↗</span></a></div></section>
     </main>
     <footer class="site-footer"><a class="brand footer-brand" href="index.html"><span class="brand-mark" aria-hidden="true">к</span><span>крошка<span class="brand-period">.</span></span></a><p>Тепло в каждом кусочке.</p><nav aria-label="Навигация в подвале"><a href="menu.html">Меню</a><a href="about.html">О нас</a><a href="visit.html">Как найти</a></nav><span>© <span class="current-year">2026</span> Крошка</span></footer>
+    <nav class="mobile-dock" aria-label="Быстрая навигация"><a href="index.html"><span aria-hidden="true">⌂</span><span>Главная</span></a><a href="menu.html"><span aria-hidden="true">☷</span><span>Меню</span></a><a href="favorites.html"><span aria-hidden="true">♡</span><span>Избранное</span></a><button class="cart-toggle" type="button" aria-label="Открыть корзину"><span aria-hidden="true">🛒</span><span>Корзина</span></button></nav>
   </body>
 </html>

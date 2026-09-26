@@ -6,6 +6,8 @@
     <meta name="theme-color" content="#211b16">
     <meta name="description" content="История кофейни-пекарни Крошка и её простой принцип: не гнаться за идеальным, а делать вкусно.">
     <title>О нас — Крошка</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="assets/icons/kroshka.svg" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
@@ -15,7 +17,7 @@
     <a class="skip-link" href="#main-content">Перейти к содержимому</a>
     <header class="site-header">
       <a class="brand" href="index.html" aria-label="Крошка — на главную"><span class="brand-mark" aria-hidden="true">к</span><span>крошка<span class="brand-period">.</span></span></a>
-      <nav class="main-nav" id="main-navigation" aria-label="Основная навигация"><a href="index.html">Главная</a><a href="menu.html">Меню</a><a href="about.html" aria-current="page">О нас</a><a href="visit.html">Как найти</a></nav>
+      <nav class="main-nav" id="main-navigation" aria-label="Основная навигация"><a href="index.html">Главная</a><a href="menu.html">Меню</a><a href="favorites.html">Избранное <span class="favorites-count" aria-label="Избранных товаров: 0">0</span></a><a href="about.html" aria-current="page">О нас</a><a href="visit.html">Как найти</a></nav>
       <div class="header-actions"><button class="cart-toggle header-cart" type="button" aria-label="Открыть корзину">Корзина <span class="header-cart-count">0</span></button><button class="theme-toggle icon-button" type="button" aria-label="Включить светлую тему" title="Сменить тему"><span aria-hidden="true">☼</span></button><button class="nav-toggle icon-button" type="button" aria-label="Открыть навигацию" aria-controls="main-navigation" aria-expanded="false"><span aria-hidden="true">☰</span></button></div>
     </header>
     <main id="main-content" class="page-main">
@@ -28,12 +30,22 @@
           <article><span class="value-icon" aria-hidden="true">🍳</span><h3>Завтраки</h3><p>Небольшой выбор сытных блюд, чтобы утро началось хорошо.</p></article>
         </div>
         <div class="gallery-strip" aria-label="Маленькие радости Крошки">
-          <div><span aria-hidden="true">🥐</span><small>ИЗ ПЕЧИ</small></div><div><span aria-hidden="true">☕</span><small>СВЕЖИЙ КОФЕ</small></div><div><span aria-hidden="true">🍓</span><small>СЕЗОННЫЕ ВКУСЫ</small></div>
+          <figure><span aria-hidden="true">🥐</span><figcaption>ИЗ ПЕЧИ</figcaption></figure><figure><span aria-hidden="true">☕</span><figcaption>СВЕЖИЙ КОФЕ</figcaption></figure><figure><span aria-hidden="true">🍓</span><figcaption>СЕЗОННЫЕ ВКУСЫ</figcaption></figure>
         </div>
+        <aside class="brand-story"><p class="eyebrow">ПОЧЕМУ «КРОШКА»?</p><p>Название — про маленькие радости: кусочек выпечки, глоток кофе и минуту спокойствия посреди дня.</p></aside>
         <blockquote class="principle-quote">Не гонимся за идеальным.<br><span>Делаем вкусно.</span></blockquote>
+      </section>
+      <section class="faq-section section-wrap" aria-labelledby="faq-title">
+        <div class="section-heading"><div><p class="eyebrow">ПЕРЕД ВИЗИТОМ</p><h2 id="faq-title">Частые <span>вопросы.</span></h2></div></div>
+        <div class="faq-list">
+          <details><summary>Есть ли самовывоз?</summary><p>Да, можно собрать заказ и забрать его в кофейне по адресу Москва, ул. Пекарская, 12. Онлайн-оформление сайта сейчас работает в демо-режиме и не передаёт заказ в кофейню.</p></details>
+          <details><summary>Есть ли завтраки?</summary><p>Да, в меню есть тост с авокадо.</p></details>
+          <details><summary>Во сколько открывается «Крошка»?</summary><p>Каждый день в 8:00. Кофейня работает до 21:00.</p></details>
+        </div>
       </section>
       <section class="visit-band section-wrap"><div><p class="eyebrow">БУДЕМ РАДЫ ВСТРЕЧЕ</p><h2>Загляните на <span>кофе.</span></h2></div><div class="visit-band-details"><p>Москва, ул. Пекарская, 12<br>Каждый день · 8:00 — 21:00</p><a class="button button-primary" href="visit.html">Как нас найти <span aria-hidden="true">↗</span></a></div></section>
     </main>
     <footer class="site-footer"><a class="brand footer-brand" href="index.html"><span class="brand-mark" aria-hidden="true">к</span><span>крошка<span class="brand-period">.</span></span></a><p>Тепло в каждом кусочке.</p><nav aria-label="Навигация в подвале"><a href="menu.html">Меню</a><a href="about.html">О нас</a><a href="visit.html">Как найти</a></nav><span>© <span class="current-year">2026</span> Крошка</span></footer>
+    <nav class="mobile-dock" aria-label="Быстрая навигация"><a href="index.html"><span aria-hidden="true">⌂</span><span>Главная</span></a><a href="menu.html"><span aria-hidden="true">☷</span><span>Меню</span></a><a href="favorites.html"><span aria-hidden="true">♡</span><span>Избранное</span></a><button class="cart-toggle" type="button" aria-label="Открыть корзину"><span aria-hidden="true">🛒</span><span>Корзина</span></button></nav>
   </body>
 </html>
