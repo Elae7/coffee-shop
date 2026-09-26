@@ -311,12 +311,12 @@
   function setupTheme() {
     const toggle = document.querySelector(".theme-toggle");
     if (!toggle) return;
-    let theme = "dark";
+    let theme = "light";
     try {
       const saved = localStorage.getItem(themeStorageKey);
       if (saved === "light" || saved === "dark") theme = saved;
     } catch (error) {
-      showToast("Не удалось восстановить тему; включена тёмная.");
+      showToast("Не удалось восстановить тему; включена светлая.");
       console.error("Не удалось прочитать сохранённую тему.", error);
     }
 
