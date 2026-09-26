@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#211b16">
+    <meta name="description" content="Оформление заказа для самовывоза из кофейни-пекарни Крошка.">
+    <title>Оформление заказа — Крошка</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="menu-data.js" defer></script><script src="order-config.js" defer></script><script src="js_main1.js" defer></script><script src="order.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Перейти к содержимому</a>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Крошка — на главную"><span class="brand-mark" aria-hidden="true">к</span><span>крошка<span class="brand-period">.</span></span></a>
+      <nav class="main-nav" id="main-navigation" aria-label="Основная навигация"><a href="index.html">Главная</a><a href="menu.html">Меню</a><a href="about.html">О нас</a><a href="visit.html">Как найти</a></nav>
+      <div class="header-actions"><button class="cart-toggle header-cart" type="button" aria-current="page" aria-label="Открыть корзину">Корзина <span class="header-cart-count">0</span></button><button class="theme-toggle icon-button" type="button" aria-label="Включить светлую тему" title="Сменить тему"><span aria-hidden="true">☼</span></button><button class="nav-toggle icon-button" type="button" aria-label="Открыть навигацию" aria-controls="main-navigation" aria-expanded="false"><span aria-hidden="true">☰</span></button></div>
+    </header>
+    <main id="main-content" class="page-main">
+      <section class="page-intro"><p class="eyebrow"><span class="eyebrow-dot"></span> ПОСЛЕДНИЙ ШАГ ДО КОФЕ</p><h1>Оформить <span>заказ.</span></h1><p>Оставьте контакт — соберём ваш заказ к выбранному времени.</p></section>
+      <section class="order-layout section-wrap">
+        <div class="order-form-panel">
+          <p class="eyebrow">КОНТАКТНЫЕ ДАННЫЕ</p>
+          <form id="order-form">
+            <label class="form-field">Имя<input name="customerName" type="text" autocomplete="name" required maxlength="80" placeholder="Как к вам обращаться?"></label>
+            <label class="form-field">Телефон<input name="phone" type="tel" autocomplete="tel" inputmode="tel" required maxlength="24" placeholder="+7 900 000-00-00" aria-describedby="phone-help"><span id="phone-help" class="field-help">Нужен, чтобы уточнить детали самовывоза.</span></label>
+            <label class="form-field">Когда заберёте?<select name="pickupTime" required><option value="Как можно скорее">Как можно скорее</option><option>12:00</option><option>12:30</option><option>13:00</option><option>13:30</option><option>14:00</option><option>14:30</option><option>15:00</option><option>15:30</option><option>16:00</option><option>16:30</option><option>17:00</option><option>17:30</option><option>18:00</option><option>18:30</option><option>19:00</option><option>19:30</option><option>20:00</option></select></label>
+            <label class="form-field">Комментарий к заказу <textarea name="comment" rows="3" maxlength="500" placeholder="Например, без сахара"></textarea></label>
+            <p class="pickup-note"><strong>Самовывоз</strong><span>Москва, ул. Пекарская, 12 · ежедневно 8:00–21:00</span></p>
+            <p class="form-message" role="status" aria-live="polite" hidden></p>
+            <button class="button button-primary submit-order" type="submit" disabled>Оформить заказ <span aria-hidden="true">↗</span></button>
+            <p class="endpoint-note">Пока сайт работает в демо-режиме: заказ не отправляется владельцу. Реальную отправку можно включить позже через внешний endpoint.</p>
+          </form>
+        </div>
+        <aside class="order-summary-panel" aria-labelledby="order-summary-title"><p class="eyebrow">ВАШ ВЫБОР</p><h2 id="order-summary-title">Ваш заказ</h2><ul class="order-summary-list"></ul><p class="order-empty" hidden>Корзина пока пуста. <a href="menu.html">Вернуться в меню ↗</a></p><div class="order-total"><span>Итого</span><strong>0 ₽</strong></div><a class="text-link" href="menu.html">Добавить ещё <span aria-hidden="true">↗</span></a></aside>
+      </section>
+      <section class="order-success section-wrap" hidden aria-labelledby="success-title">
+        <span class="success-icon" aria-hidden="true">✓</span><p class="eyebrow">КВЕСТ ВЫПОЛНЕН</p><h2 id="success-title">Заказ собран!</h2><p class="success-caption"></p><div class="success-details"><span>Номер заказа</span><strong class="success-order-number"></strong><span>Итого</span><strong class="success-total"></strong></div><div class="success-actions"><button class="button button-secondary copy-order" type="button">Скопировать заказ</button><a class="button button-primary" href="menu.html">Вернуться в меню</a><a class="text-link" href="index.html">На главную</a></div></section>
+      <section class="last-order section-wrap" hidden aria-labelledby="last-order-title"><p class="eyebrow">СОХРАНЕНО НА ЭТОМ УСТРОЙСТВЕ</p><h2 id="last-order-title">Последний заказ <span class="last-order-number"></span></h2><p><span class="last-order-date"></span> · <span class="last-order-items"></span> · <strong class="last-order-total"></strong></p></section>
+    </main>
+    <footer class="site-footer"><a class="brand footer-brand" href="index.html"><span class="brand-mark" aria-hidden="true">к</span><span>крошка<span class="brand-period">.</span></span></a><p>Тепло в каждом кусочке.</p><nav aria-label="Навигация в подвале"><a href="menu.html">Меню</a><a href="about.html">О нас</a><a href="visit.html">Как найти</a></nav><span>© <span class="current-year">2026</span> Крошка</span></footer>
+  </body>
+</html>
