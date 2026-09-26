@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#211b16">
+    <meta name="description" content="Избранные товары кофейни-пекарни Крошка.">
+    <title>Избранное — Крошка</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="assets/icons/kroshka.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="menu-data.js" defer></script><script src="order-config.js" defer></script><script src="js_main1.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Перейти к содержимому</a>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Крошка — на главную"><span class="brand-mark" aria-hidden="true">к</span><span>крошка<span class="brand-period">.</span></span></a>
+      <nav class="main-nav" id="main-navigation" aria-label="Основная навигация"><a href="index.html">Главная</a><a href="menu.html">Меню</a><a href="favorites.html" aria-current="page">Избранное <span class="favorites-count" aria-label="Избранных товаров: 0">0</span></a><a href="about.html">О нас</a><a href="visit.html">Как найти</a></nav>
+      <div class="header-actions"><button class="cart-toggle header-cart" type="button" aria-label="Открыть корзину">Корзина <span class="header-cart-count">0</span></button><button class="theme-toggle icon-button" type="button" aria-label="Включить светлую тему" title="Сменить тему"><span aria-hidden="true">☼</span></button><button class="nav-toggle icon-button" type="button" aria-label="Открыть навигацию" aria-controls="main-navigation" aria-expanded="false"><span aria-hidden="true">☰</span></button></div>
+    </header>
+    <main id="main-content" class="page-main">
+      <section class="page-intro"><p class="eyebrow"><span class="eyebrow-dot"></span> СОХРАНИЛИ ДЛЯ ВАС</p><h1>Избранное <span>Крошки.</span></h1><p>Любимое всегда под рукой — избранное хранится на этом устройстве.</p></section>
+      <section class="favorites-page section-wrap">
+        <div class="product-grid favorites-grid" data-favorites-grid></div>
+        <div class="favorites-empty"><span aria-hidden="true">♡</span><h2>Здесь пока пусто.</h2><p>Добавьте то, что хочется попробовать ещё раз.</p><a class="button button-primary" href="menu.html">Перейти в меню</a></div>
+      </section>
+    </main>
+    <dialog class="product-dialog" aria-labelledby="quick-view-title">
+      <div class="product-dialog-panel">
+        <button class="icon-button product-dialog-close" type="button" aria-label="Закрыть быстрый просмотр">×</button>
+        <div class="quick-view-art"></div>
+        <div class="quick-view-content"><p class="eyebrow quick-view-category"></p><h2 class="quick-view-title" id="quick-view-title"></h2><p class="quick-view-description"></p><strong class="quick-view-price"></strong><div class="quick-view-actions"><button class="button button-primary quick-view-add" type="button">Добавить в корзину</button><span class="quick-view-favorite-slot"></span><button class="button button-secondary quick-view-share" type="button">Поделиться</button></div></div>
+      </div>
+    </dialog>
+    <footer class="site-footer"><a class="brand footer-brand" href="index.html"><span class="brand-mark" aria-hidden="true">к</span><span>крошка<span class="brand-period">.</span></span></a><p>Тепло в каждом кусочке.</p><nav aria-label="Навигация в подвале"><a href="menu.html">Меню</a><a href="about.html">О нас</a><a href="visit.html">Как найти</a></nav><span>© <span class="current-year">2026</span> Крошка</span></footer>
+    <nav class="mobile-dock" aria-label="Быстрая навигация"><a href="index.html"><span aria-hidden="true">⌂</span><span>Главная</span></a><a href="menu.html"><span aria-hidden="true">☷</span><span>Меню</span></a><a href="favorites.html" aria-current="page"><span aria-hidden="true">♡</span><span>Избранное</span></a><button class="cart-toggle" type="button" aria-label="Открыть корзину"><span aria-hidden="true">🛒</span><span>Корзина</span></button></nav>
+  </body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "name": "Крошка — кофейня-пекарня",
+  "short_name": "Крошка",
+  "description": "Кофейня-пекарня с тёплой выпечкой и кофе.",
+  "lang": "ru",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#211b16",
+  "theme_color": "#211b16",
+  "icons": [
+    {
+      "src": "./assets/icons/kroshka.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

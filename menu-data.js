@@ -8,3 +8,15 @@ window.KROSHKA_PRODUCTS = Object.freeze([
   { id: "cocoa", name: "Какао с маршмеллоу", category: "drinks", price: 260, description: "Настоящее какао и зефирки", icon: "🍫", badge: "", popular: 4, keywords: ["кофе", "горячий шоколад"] },
   { id: "toast", name: "Тост с авокадо", category: "breakfast", price: 390, description: "Хлеб на закваске, авокадо и яйцо", icon: "🥑", badge: "Завтрак", popular: 8 }
 ]);
+
+window.KROSHKA_COMBOS = Object.freeze([
+  { id: "coffee-break", name: "Кофейный", description: "Круассан + латте", items: ["croissant", "latte"], icon: "🥐" },
+  { id: "breakfast", name: "Завтрак", description: "Тост с авокадо + латте", items: ["toast", "latte"], icon: "🥑" },
+  { id: "sweet-pause", name: "Сладкая пауза", description: "Улитка с корицей + какао", items: ["cinnamon", "cocoa"], icon: "🍥" }
+]);
+
+window.KROSHKA_PAIRINGS = Object.freeze([
+  { source: "latte", suggestion: "croissant" },
+  { source: "cocoa", suggestion: "cookie" },
+  { source: "toast", suggestion: "latte" }
+]);

@@ -6,6 +6,8 @@
     <meta name="theme-color" content="#f5eee3">
     <meta name="description" content="Крошка — уютная кофейня-пекарня со свежей выпечкой, кофе и завтраками.">
     <title>Крошка — тепло в каждом кусочке</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="assets/icons/kroshka.svg" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -19,7 +21,7 @@
     <header class="site-header">
       <a class="brand" href="index.html" aria-label="Крошка — на главную"><span class="brand-mark" aria-hidden="true">к</span><span>крошка<span class="brand-period">.</span></span></a>
       <nav class="main-nav" id="main-navigation" aria-label="Основная навигация">
-        <a href="index.html" aria-current="page">Главная</a><a href="menu.html">Меню</a><a href="about.html">О нас</a><a href="visit.html">Как найти</a>
+        <a href="index.html" aria-current="page">Главная</a><a href="menu.html">Меню</a><a href="favorites.html">Избранное <span class="favorites-count" aria-label="Избранных товаров: 0">0</span></a><a href="about.html">О нас</a><a href="visit.html">Как найти</a>
       </nav>
       <div class="header-actions">
         <button class="cart-toggle header-cart" type="button" aria-label="Открыть корзину">Корзина <span class="header-cart-count">0</span></button>
@@ -37,6 +39,7 @@
           <div class="hero-actions"><a class="button button-primary" href="menu.html">Выбрать вкусное <span aria-hidden="true">↗</span></a><a class="button button-secondary" href="visit.html">Заглянуть к нам</a></div>
           <p class="hero-hours"><span class="status-dot"></span><span data-open-status>Каждый день · 8:00 — 21:00</span></p>
           <div class="hero-perks"><span>Свежая выпечка каждый день</span><span>Самовывоз без лишней суеты</span></div>
+          <button class="install-app button button-secondary" type="button" hidden>Добавить на главный экран</button>
         </div>
         <div class="hero-art">
           <img class="hero-photo" src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&amp;fit=crop&amp;w=1200&amp;q=85" alt="Свежая ремесленная выпечка на деревянном столе" fetchpriority="high">
@@ -50,6 +53,16 @@
         <div class="product-grid featured-grid" data-product-list data-product-ids="croissant,latte,cinnamon,toast"></div>
       </section>
 
+      <section class="today-section section-wrap" aria-labelledby="today-title">
+        <div class="today-copy"><p class="eyebrow"><span class="eyebrow-dot"></span> СЕГОДНЯ В КРОШКЕ</p><h2 id="today-title">Что нового <span>у печи?</span></h2><p>Знакомый вкус с маленькой новинкой — выбирайте то, что порадует сегодня.</p></div>
+        <div class="today-product" data-today-product></div>
+      </section>
+
+      <section class="combo-section section-wrap" aria-labelledby="combo-title">
+        <div class="section-heading"><div><p class="eyebrow"><span class="eyebrow-dot"></span> ВМЕСТЕ ВКУСНЕЕ</p><h2 id="combo-title">Готовые <span>сочетания.</span></h2></div><p class="section-note">Наборы по сумме обычных цен — без скрытых условий.</p></div>
+        <div class="combo-grid" data-combo-list></div>
+      </section>
+
       <section class="quest-section section-wrap" aria-labelledby="quest-title">
         <div class="quest-card"><span class="quest-icon" aria-hidden="true">✳</span><div><p class="eyebrow">ХОРОШАЯ ИДЕЯ НА СЕГОДНЯ</p><h2 id="quest-title">Кофе и что-нибудь к нему.</h2><p>Загляните в меню — там уже есть пара, которая вам понравится.</p></div><a class="button button-secondary" href="menu.html">Найти свою пару <span aria-hidden="true">↗</span></a></div>
       </section>
@@ -59,6 +72,11 @@
         <div class="split-art" aria-hidden="true"><span>🍞</span><i>ПЕЧЁМ<br>С ЛЮБОВЬЮ</i></div>
       </section>
 
+      <section class="recently-viewed-section section-wrap" hidden aria-labelledby="recent-title">
+        <div class="section-heading"><div><p class="eyebrow">ВАШИ ПОСЛЕДНИЕ ОТКРЫТИЯ</p><h2 id="recent-title">Недавно <span>смотрели.</span></h2></div></div>
+        <div class="product-grid recent-product-grid" data-recent-list></div>
+      </section>
+
       <section class="visit-band section-wrap">
         <div><p class="eyebrow">ЗАГЛЯДЫВАЙТЕ В ГОСТИ</p><h2>Рядом, когда нужен <span>перерыв.</span></h2></div>
         <div class="visit-band-details"><p>Москва, ул. Пекарская, 12<br>Ежедневно · 8:00 — 21:00</p><a class="button button-primary" href="visit.html">Как нас найти <span aria-hidden="true">↗</span></a></div>
@@ -66,5 +84,6 @@
     </main>
 
     <footer class="site-footer"><a class="brand footer-brand" href="index.html"><span class="brand-mark" aria-hidden="true">к</span><span>крошка<span class="brand-period">.</span></span></a><p>Тепло в каждом кусочке.</p><nav aria-label="Навигация в подвале"><a href="menu.html">Меню</a><a href="about.html">О нас</a><a href="visit.html">Как найти</a></nav><span>© <span class="current-year">2026</span> Крошка</span></footer>
+    <nav class="mobile-dock" aria-label="Быстрая навигация"><a href="index.html" aria-current="page"><span aria-hidden="true">⌂</span><span>Главная</span></a><a href="menu.html"><span aria-hidden="true">☷</span><span>Меню</span></a><a href="favorites.html"><span aria-hidden="true">♡</span><span>Избранное</span></a><button class="cart-toggle" type="button" aria-label="Открыть корзину"><span aria-hidden="true">🛒</span><span>Корзина</span></button></nav>
   </body>
 </html>
