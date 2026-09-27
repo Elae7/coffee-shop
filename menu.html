@@ -28,7 +28,7 @@
     <a class="skip-link" href="#main-content">Перейти к содержимому</a>
     <header class="site-header">
       <a class="brand" href="index.html" aria-label="Крошка — на главную"><span class="brand-mark" aria-hidden="true">к</span><span>крошка<span class="brand-period">.</span></span></a>
-      <nav class="main-nav" id="main-navigation" aria-label="Основная навигация"><a href="index.html">Главная</a><a href="menu.html" aria-current="page">Меню</a><a href="favorites.html">Избранное <span class="favorites-count" aria-label="Избранных товаров: 0">0</span></a><a href="about.html">О нас</a><a href="visit.html">Как найти</a></nav>
+      <nav class="main-nav" id="main-navigation" aria-label="Основная навигация"><a href="index.html">Главная</a><a href="menu.html" aria-current="page">Меню</a><a href="favorites.html">Избранное <span class="favorites-count" aria-label="Избранных товаров: 0">0</span></a><a href="account.html">Профиль</a><a href="about.html">О нас</a><a href="visit.html">Как найти</a></nav>
       <div class="header-actions"><button class="cart-toggle header-cart" type="button" aria-label="Открыть корзину">Корзина <span class="header-cart-count">0</span></button><button class="theme-toggle icon-button" type="button" aria-label="Включить тёмную тему" title="Сменить тему"><span aria-hidden="true">☾</span></button><button class="nav-toggle icon-button" type="button" aria-label="Открыть навигацию" aria-controls="main-navigation" aria-expanded="false"><span aria-hidden="true">☰</span></button></div>
     </header>
     <main id="main-content" class="page-main">
@@ -38,9 +38,10 @@
           <div class="category-tabs" role="group" aria-label="Категории меню">
             <button class="category-tab is-active" type="button" data-category="all" aria-pressed="true">Все</button><button class="category-tab" type="button" data-category="bakery" aria-pressed="false">Выпечка</button><button class="category-tab" type="button" data-category="drinks" aria-pressed="false">Напитки</button><button class="category-tab" type="button" data-category="breakfast" aria-pressed="false">Завтраки</button>
           </div>
-          <label class="search-field"><span class="visually-hidden">Найти товар по названию</span><span aria-hidden="true">⌕</span><input id="menu-search" type="search" placeholder="Найти вкусное..." autocomplete="off"></label>
+          <label class="search-field"><span class="visually-hidden">Найти товар по названию</span><span aria-hidden="true">⌕</span><input id="menu-search" type="search" placeholder="Найти вкусное..." autocomplete="off" aria-describedby="search-shortcut"><button class="search-clear" type="button" aria-label="Очистить поиск" hidden>×</button><span id="search-shortcut" class="visually-hidden">Нажмите косую черту, чтобы перейти к поиску.</span></label>
           <label class="sort-field"><span>Сортировка</span><select id="menu-sort"><option value="popular">По популярности</option><option value="price-asc">По цене ↑</option><option value="price-desc">По цене ↓</option><option value="name">По названию</option></select></label>
         </div>
+        <p class="visually-hidden" id="menu-result-count" aria-live="polite" aria-atomic="true"></p>
         <div class="product-grid menu-product-grid" data-menu-grid aria-live="polite"></div>
         <p class="no-results" hidden>Ничего не найдено. Попробуйте изменить запрос.</p>
       </section>
@@ -66,7 +67,7 @@
         </div>
       </div>
     </dialog>
-    <footer class="site-footer"><a class="brand footer-brand" href="index.html"><span class="brand-mark" aria-hidden="true">к</span><span>крошка<span class="brand-period">.</span></span></a><p>Тепло в каждом кусочке.</p><nav aria-label="Навигация в подвале"><a href="menu.html">Меню</a><a href="about.html">О нас</a><a href="visit.html">Как найти</a></nav><span>© <span class="current-year">2026</span> Крошка</span></footer>
-    <nav class="mobile-dock" aria-label="Быстрая навигация"><a href="index.html"><span aria-hidden="true">⌂</span><span>Главная</span></a><a href="menu.html" aria-current="page"><span aria-hidden="true">☷</span><span>Меню</span></a><a href="favorites.html"><span aria-hidden="true">♡</span><span>Избранное</span></a><button class="cart-toggle" type="button" aria-label="Открыть корзину"><span aria-hidden="true">🛒</span><span>Корзина</span></button></nav>
+    <footer class="site-footer"><a class="brand footer-brand" href="index.html"><span class="brand-mark" aria-hidden="true">к</span><span>крошка<span class="brand-period">.</span></span></a><p>Тепло в каждом кусочке.</p><nav aria-label="Документация и страницы"><a href="menu.html">Меню</a><a href="account.html">Профиль</a><a href="docs.html">Документация</a><a href="about.html">О нас</a><a href="visit.html">Как найти</a></nav><span>© <span class="current-year">2026</span> Крошка</span></footer>
+    <nav class="mobile-dock" aria-label="Быстрая навигация"><a href="index.html"><span aria-hidden="true">⌂</span><span>Главная</span></a><a href="menu.html" aria-current="page"><span aria-hidden="true">☷</span><span>Меню</span></a><a href="favorites.html"><span aria-hidden="true">♡</span><span>Избранное</span></a><a href="account.html"><span aria-hidden="true">☺</span><span>Профиль</span></a><button class="cart-toggle" type="button" aria-label="Открыть корзину"><span aria-hidden="true">🛒</span><span>Корзина</span></button></nav>
   </body>
 </html>

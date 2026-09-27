@@ -22,13 +22,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <script src="menu-data.js" defer></script><script src="js_main1.js" defer></script><script src="order.js" defer></script>
+    <script src="menu-data.js" defer></script><script src="order-config.js" defer></script><script src="account-db.js" defer></script><script src="js_main1.js" defer></script><script src="order.js" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Перейти к содержимому</a>
     <header class="site-header">
       <a class="brand" href="index.html" aria-label="Крошка — на главную"><span class="brand-mark" aria-hidden="true">к</span><span>крошка<span class="brand-period">.</span></span></a>
-      <nav class="main-nav" id="main-navigation" aria-label="Основная навигация"><a href="index.html">Главная</a><a href="menu.html">Меню</a><a href="favorites.html">Избранное <span class="favorites-count" aria-label="Избранных товаров: 0">0</span></a><a href="about.html">О нас</a><a href="visit.html">Как найти</a></nav>
+      <nav class="main-nav" id="main-navigation" aria-label="Основная навигация"><a href="index.html">Главная</a><a href="menu.html">Меню</a><a href="favorites.html">Избранное <span class="favorites-count" aria-label="Избранных товаров: 0">0</span></a><a href="account.html">Профиль</a><a href="about.html">О нас</a><a href="visit.html">Как найти</a></nav>
       <div class="header-actions"><button class="cart-toggle header-cart" type="button" aria-current="page" aria-label="Открыть корзину">Корзина <span class="header-cart-count">0</span></button><button class="theme-toggle icon-button" type="button" aria-label="Включить тёмную тему" title="Сменить тему"><span aria-hidden="true">☾</span></button><button class="nav-toggle icon-button" type="button" aria-label="Открыть навигацию" aria-controls="main-navigation" aria-expanded="false"><span aria-hidden="true">☰</span></button></div>
     </header>
     <main id="main-content" class="page-main">
@@ -37,23 +37,34 @@
         <div class="order-form-panel">
           <p class="eyebrow">КОНТАКТНЫЕ ДАННЫЕ</p>
           <form id="order-form">
+            <p class="profile-prefill-note" hidden>Контакты подставлены из локального профиля. <a href="account.html">Изменить профиль ↗</a></p>
             <label class="form-field">Имя<input name="customerName" type="text" autocomplete="name" required maxlength="80" placeholder="Как к вам обращаться?"></label>
             <label class="form-field">Телефон<input name="phone" type="tel" autocomplete="tel" inputmode="tel" required maxlength="24" placeholder="+7 900 000-00-00" aria-describedby="phone-help"><span id="phone-help" class="field-help">Нужен, чтобы уточнить детали самовывоза.</span></label>
             <label class="form-field">Когда заберёте?<select name="pickupTime" required><option value="Как можно скорее">Как можно скорее</option><option>12:00</option><option>12:30</option><option>13:00</option><option>13:30</option><option>14:00</option><option>14:30</option><option>15:00</option><option>15:30</option><option>16:00</option><option>16:30</option><option>17:00</option><option>17:30</option><option>18:00</option><option>18:30</option><option>19:00</option><option>19:30</option><option>20:00</option></select></label>
             <label class="form-field">Комментарий к заказу <textarea name="comment" rows="3" maxlength="500" placeholder="Например, без сахара"></textarea></label>
             <p class="pickup-note"><strong>Самовывоз</strong><span>Москва, ул. Пекарская, 12 · ежедневно 8:00–21:00</span></p>
+            <label class="form-consent" hidden><input name="dataConsent" type="checkbox"><span>Согласен(на) передать контактные данные и состав заказа сервису Formspree для оформления.</span></label>
             <p class="form-message" role="status" aria-live="polite" hidden></p>
             <button class="button button-primary submit-order" type="submit" disabled>Оформить заказ <span aria-hidden="true">↗</span></button>
-            <p class="endpoint-note">Демо-режим: данные и история останутся только в этом браузере. Заказ не отправляется и оплата не производится.</p>
+            <p class="endpoint-note" aria-live="polite">Демо-режим: данные и история останутся только в этом браузере. Заказ не отправляется и оплата не производится.</p>
           </form>
         </div>
         <aside class="order-summary-panel" aria-labelledby="order-summary-title"><p class="eyebrow">ВАШ ВЫБОР</p><h2 id="order-summary-title">Ваш заказ</h2><ul class="order-summary-list"></ul><p class="order-empty" hidden>Корзина пока пуста. <a href="menu.html">Вернуться в меню ↗</a></p><div class="order-total"><span>Итого</span><strong>0 ₽</strong></div><a class="text-link" href="menu.html">Добавить ещё <span aria-hidden="true">↗</span></a></aside>
       </section>
       <section class="order-success section-wrap" hidden aria-labelledby="success-title">
-        <span class="success-icon" aria-hidden="true">✓</span><p class="eyebrow">КВЕСТ ВЫПОЛНЕН</p><h2 id="success-title">Заказ собран!</h2><p class="success-caption"></p><div class="success-details"><span>Номер заказа</span><strong class="success-order-number"></strong><span>Итого</span><strong class="success-total"></strong></div><div class="success-actions"><button class="button button-secondary copy-order" type="button">Скопировать заказ</button><a class="button button-primary" href="menu.html">Вернуться в меню</a><a class="text-link" href="index.html">На главную</a></div></section>
-      <section class="last-order section-wrap" hidden aria-labelledby="last-order-title"><p class="eyebrow">СОХРАНЕНО НА ЭТОМ УСТРОЙСТВЕ</p><h2 id="last-order-title">Последний заказ <span class="last-order-number"></span></h2><p><span class="last-order-date"></span> · <span class="last-order-items"></span> · <strong class="last-order-total"></strong></p></section>
+        <span class="success-icon" aria-hidden="true">✓</span><p class="eyebrow">КВЕСТ ВЫПОЛНЕН</p><h2 id="success-title">Заказ собран!</h2><p class="success-caption"></p>
+        <ol class="order-progress" aria-label="Статус заказа" aria-live="polite">
+          <li data-order-status="created"><span>1</span><strong>Создан</strong></li>
+          <li data-order-status="sent"><span>2</span><strong>Отправлен</strong></li>
+          <li data-order-status="ready"><span>3</span><strong>Готов</strong></li>
+        </ol>
+        <p class="order-status-note"></p><button class="button button-secondary advance-order-status" type="button" hidden></button><p class="success-action-message" role="status" aria-live="polite" hidden></p>
+        <div class="success-details"><span>Номер заказа</span><strong class="success-order-number"></strong><span>Итого</span><strong class="success-total"></strong></div>
+        <div class="success-actions"><button class="button button-secondary copy-order" type="button">Скопировать заказ</button><button class="button button-secondary share-order" type="button">Поделиться заказом</button><a class="button button-primary" href="menu.html">Вернуться в меню</a><a class="text-link" href="index.html">На главную</a></div>
+      </section>
+      <section class="last-order section-wrap" hidden aria-labelledby="last-order-title"><p class="eyebrow">СОХРАНЕНО НА ЭТОМ УСТРОЙСТВЕ</p><h2 id="last-order-title">Последний заказ <span class="last-order-number"></span></h2><p><span class="last-order-date"></span> · <span class="last-order-items"></span> · <strong class="last-order-total"></strong> · <span class="last-order-status"></span></p></section>
     </main>
-    <footer class="site-footer"><a class="brand footer-brand" href="index.html"><span class="brand-mark" aria-hidden="true">к</span><span>крошка<span class="brand-period">.</span></span></a><p>Тепло в каждом кусочке.</p><nav aria-label="Навигация в подвале"><a href="menu.html">Меню</a><a href="about.html">О нас</a><a href="visit.html">Как найти</a></nav><span>© <span class="current-year">2026</span> Крошка</span></footer>
-    <nav class="mobile-dock" aria-label="Быстрая навигация"><a href="index.html"><span aria-hidden="true">⌂</span><span>Главная</span></a><a href="menu.html"><span aria-hidden="true">☷</span><span>Меню</span></a><a href="favorites.html"><span aria-hidden="true">♡</span><span>Избранное</span></a><button class="cart-toggle" type="button" aria-current="page" aria-label="Открыть корзину"><span aria-hidden="true">🛒</span><span>Корзина</span></button></nav>
+    <footer class="site-footer"><a class="brand footer-brand" href="index.html"><span class="brand-mark" aria-hidden="true">к</span><span>крошка<span class="brand-period">.</span></span></a><p>Тепло в каждом кусочке.</p><nav aria-label="Документация и страницы"><a href="menu.html">Меню</a><a href="account.html">Профиль</a><a href="docs.html">Документация</a><a href="about.html">О нас</a><a href="visit.html">Как найти</a></nav><span>© <span class="current-year">2026</span> Крошка</span></footer>
+    <nav class="mobile-dock" aria-label="Быстрая навигация"><a href="index.html"><span aria-hidden="true">⌂</span><span>Главная</span></a><a href="menu.html"><span aria-hidden="true">☷</span><span>Меню</span></a><a href="favorites.html"><span aria-hidden="true">♡</span><span>Избранное</span></a><a href="account.html"><span aria-hidden="true">☺</span><span>Профиль</span></a><button class="cart-toggle" type="button" aria-current="page" aria-label="Открыть корзину"><span aria-hidden="true">🛒</span><span>Корзина</span></button></nav>
   </body>
 </html>
