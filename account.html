@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f7f1e7">
+    <meta name="description" content="Локальный профиль Крошки: сохранённые контакты, любимые категории и история демо-заказов на этом устройстве.">
+    <meta name="robots" content="noindex,follow">
+    <title>Профиль — Крошка</title>
+    <link rel="canonical" href="https://elae7.github.io/coffee-shop/account.html">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="assets/icons/kroshka.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="assets/icons/kroshka-180.png">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Крошка">
+    <meta property="og:title" content="Профиль — Крошка">
+    <meta property="og:description" content="Управляйте локальными данными профиля и историей заказов в этом браузере.">
+    <meta property="og:url" content="https://elae7.github.io/coffee-shop/account.html">
+    <meta property="og:image" content="https://elae7.github.io/coffee-shop/assets/images/croissant-coffee.webp">
+    <meta property="og:image:alt" content="Круассан и кофе на завтрак">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="menu-data.js" defer></script>
+    <script src="js_main1.js" defer></script>
+    <script src="account-db.js" defer></script>
+    <script src="account.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Перейти к содержимому</a>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Крошка — на главную"><span class="brand-mark" aria-hidden="true">к</span><span>крошка<span class="brand-period">.</span></span></a>
+      <nav class="main-nav" id="main-navigation" aria-label="Основная навигация">
+        <a href="index.html">Главная</a><a href="menu.html">Меню</a>
+        <a href="favorites.html">Избранное <span class="favorites-count" aria-label="Избранных товаров: 0">0</span></a>
+        <a href="account.html" aria-current="page">Профиль</a><a href="about.html">О нас</a><a href="visit.html">Как найти</a>
+      </nav>
+      <div class="header-actions"><button class="cart-toggle header-cart" type="button" aria-label="Открыть корзину">Корзина <span class="header-cart-count">0</span></button><button class="theme-toggle icon-button" type="button" aria-label="Сменить тему" title="Сменить тему"><span aria-hidden="true">☾</span></button><button class="nav-toggle icon-button" type="button" aria-label="Открыть навигацию" aria-controls="main-navigation" aria-expanded="false"><span aria-hidden="true">☰</span></button></div>
+    </header>
+    <main id="main-content" class="page-main">
+      <section class="page-intro">
+        <p class="eyebrow"><span class="eyebrow-dot"></span> ВАШЕ МЕСТО В КРОШКЕ</p>
+        <h1>Мой <span>профиль.</span></h1>
+        <p>Сохраните контакты для демо-оформления, отметьте любимое направление и просматривайте заказы, сделанные в этом браузере.</p>
+      </section>
+      <section class="account-layout section-wrap" aria-labelledby="profile-title">
+        <div class="account-main-column">
+          <article class="account-panel account-profile-panel">
+            <div class="account-panel-heading">
+              <div><p class="eyebrow">ЛОКАЛЬНЫЙ ПРОФИЛЬ</p><h2 id="profile-title">Создайте профиль</h2></div>
+              <span class="profile-stamp" aria-hidden="true">К</span>
+            </div>
+            <p class="profile-empty">Регистрация здесь работает только для знакомства с интерфейсом: профиль хранится на этом устройстве и не является защищённым аккаунтом.</p>
+            <div class="profile-card" hidden>
+              <p class="profile-greeting">Рады видеть вас, <strong class="profile-name"></strong></p>
+              <dl class="profile-details">
+                <div><dt>Электронная почта</dt><dd class="profile-email"></dd></div>
+                <div><dt>Телефон</dt><dd class="profile-phone"></dd></div>
+                <div><dt>Любимая категория</dt><dd class="profile-preference"></dd></div>
+                <div><dt>День рождения</dt><dd class="profile-birthday"></dd></div>
+              </dl>
+              <a class="text-link profile-preference-link" href="menu.html" hidden>Показать эту категорию в меню ↗</a>
+            </div>
+            <form id="profile-form" class="profile-editor" novalidate>
+              <h3 class="profile-editor-heading">Профиль</h3>
+              <div class="account-form-grid">
+                <label class="form-field">Как к вам обращаться?<input name="name" type="text" autocomplete="name" required maxlength="80" placeholder="Ваше имя"></label>
+                <label class="form-field">Электронная почта<input name="email" type="email" autocomplete="email" required maxlength="160" placeholder="name@example.com"></label>
+                <label class="form-field">Телефон <span class="field-help">Необязательно; подставится в демо-заказ.</span><input name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="24" placeholder="+7 900 000-00-00"></label>
+                <label class="form-field">День рождения <span class="field-help">Необязательно; напоминания не отправляются.</span><input name="birthday" type="date"></label>
+                <label class="form-field account-preference-field">Что вам ближе?<select name="preference"><option value="">Пока не выбрано</option><option value="bakery">Свежая выпечка</option><option value="drinks">Кофе и напитки</option><option value="breakfast">Завтраки</option></select></label>
+              </div>
+              <p class="account-data-note">Не указывайте пароли, платёжные данные или другую чувствительную информацию. Профиль сам по себе не отправляется на сервер. Если владелец отдельно настроит отправку заказа, введённые в checkout имя и телефон уйдут Formspree только после вашего согласия.</p>
+              <div class="account-actions">
+                <button class="button button-primary profile-save" type="submit">Создать профиль</button>
+                <button class="button button-secondary profile-cancel" type="button" hidden>Отмена</button>
+                <button class="button button-secondary profile-edit" type="button" hidden>Изменить данные</button>
+                <button class="button button-danger profile-delete" type="button" hidden>Удалить профиль</button>
+              </div>
+            </form>
+          </article>
+          <article class="account-panel" aria-labelledby="account-orders-title">
+            <div class="account-panel-heading account-orders-heading">
+              <div><p class="eyebrow">ТОЛЬКО НА ЭТОМ УСТРОЙСТВЕ</p><h2 id="account-orders-title">История заказов</h2></div>
+              <a class="text-link account-latest-link" href="order.html">К последнему заказу ↗</a>
+            </div>
+            <p class="account-orders-empty">Пока нет сохранённых заказов. Соберите корзину в <a href="menu.html">меню</a> и пройдите демо-оформление.</p>
+            <ol class="account-order-list" aria-live="polite"></ol>
+            <button class="button button-secondary clear-order-history" type="button" hidden>Удалить историю</button>
+          </article>
+          <p class="account-message" role="status" aria-live="polite" hidden></p>
+        </div>
+        <aside class="account-side-panel">
+          <span class="account-side-icon" aria-hidden="true">✦</span>
+          <p class="eyebrow">МАЛЕНЬКИЙ БОНУС</p>
+          <h2>Любимое — ближе.</h2>
+          <p>В профиле можно хранить только базовые контакты и вкусовые предпочтения. Избранное и корзина по-прежнему доступны без регистрации.</p>
+          <a class="button button-secondary" href="favorites.html">Открыть избранное</a>
+          <a class="text-link" href="docs.html">Читать документацию ↗</a>
+          <p class="account-local-warning">Это не вход в аккаунт: общего сервера, пароля и синхронизации между устройствами нет.</p>
+        </aside>
+      </section>
+    </main>
+    <footer class="site-footer"><a class="brand footer-brand" href="index.html"><span class="brand-mark" aria-hidden="true">к</span><span>крошка<span class="brand-period">.</span></span></a><p>Тепло в каждом кусочке.</p><nav aria-label="Документация и страницы"><a href="menu.html">Меню</a><a href="account.html">Профиль</a><a href="docs.html">Документация</a><a href="about.html">О нас</a><a href="visit.html">Как найти</a></nav><span>© <span class="current-year">2026</span> Крошка</span></footer>
+    <nav class="mobile-dock" aria-label="Быстрая навигация"><a href="index.html"><span aria-hidden="true">⌂</span><span>Главная</span></a><a href="menu.html"><span aria-hidden="true">☷</span><span>Меню</span></a><a href="favorites.html"><span aria-hidden="true">♡</span><span>Избранное</span></a><a href="account.html" aria-current="page"><span aria-hidden="true">☺</span><span>Профиль</span></a><button class="cart-toggle" type="button" aria-label="Открыть корзину"><span aria-hidden="true">🛒</span><span>Корзина</span></button></nav>
+  </body>
+</html>

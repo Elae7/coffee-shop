@@ -8,10 +8,36 @@
   const favoritesStorageKey = "kroshka-favorites";
   const recentStorageKey = "kroshka-recently-viewed";
   const categoryNames = { bakery: "Выпечка", drinks: "Напитки", breakfast: "Завтраки" };
+  const russianPluralRules = new Intl.PluralRules("ru");
   const cart = new Map();
   const favorites = new Set();
   let recentlyViewed = [];
   const formatPrice = (amount) => `${amount.toLocaleString("ru-RU")} ₽`;
+
+  async function copyText(value) {
+    if (navigator.clipboard?.writeText) {
+      try {
+        await navigator.clipboard.writeText(value);
+        return;
+      } catch (error) {
+        console.warn("Буфер обмена недоступен; пробуем запасной способ.", error);
+      }
+    }
+    const textarea = document.createElement("textarea");
+    textarea.value = value;
+    textarea.setAttribute("readonly", "");
+    textarea.style.position = "fixed";
+    textarea.style.opacity = "0";
+    document.body.append(textarea);
+    let copied = false;
+    try {
+      textarea.select();
+      copied = document.execCommand("copy");
+    } finally {
+      textarea.remove();
+    }
+    if (!copied) throw new Error("Браузер не разрешил копирование.");
+  }
 
   function showToast(message, suggestionId = null) {
     let region = document.querySelector(".toast-region");
@@ -161,7 +187,26 @@
     close.addEventListener("click", () => setOpen(false));
     backdrop.addEventListener("click", () => setOpen(false));
     document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape" && drawer.classList.contains("is-open")) setOpen(false);
+      if (!drawer.classList.contains("is-open")) return;
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setOpen(false);
+        return;
+      }
+      if (event.key !== "Tab") return;
+      const focusable = Array.from(drawer.querySelectorAll(
+        'a[href], button:not(:disabled), input:not(:disabled), select:not(:disabled), textarea:not(:disabled), [tabindex]:not([tabindex="-1"])'
+      )).filter((element) => !element.hidden && !element.closest("[hidden]") && element.getClientRects().length > 0);
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (!first || !last) return;
+      if (event.shiftKey && (document.activeElement === first || !drawer.contains(document.activeElement))) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && (document.activeElement === last || !drawer.contains(document.activeElement))) {
+        event.preventDefault();
+        first.focus();
+      }
     });
     drawer.querySelector(".cart-checkout").addEventListener("click", (event) => {
       if (cart.size === 0) {
@@ -226,6 +271,7 @@
       controls.append(makeButton(product.name, "decrease", id));
       const value = document.createElement("span");
       value.textContent = String(quantity);
+      value.setAttribute("aria-label", `Количество: ${quantity}`);
       controls.append(value, makeButton(product.name, "increase", id));
       row.append(icon, details, controls);
       fragment.append(row);
@@ -424,10 +470,15 @@
     const grid = document.querySelector("[data-menu-grid]");
     if (!grid) return;
     const search = document.querySelector("#menu-search");
+    const clearSearch = document.querySelector(".search-clear");
     const sort = document.querySelector("#menu-sort");
     const tabs = Array.from(document.querySelectorAll(".category-tab"));
     const empty = document.querySelector(".no-results");
-    let activeCategory = "all";
+    const resultCount = document.querySelector("#menu-result-count");
+    const requestedCategory = new URLSearchParams(window.location.search).get("category");
+    let activeCategory = tabs.some((tab) => tab.dataset.category === requestedCategory)
+      ? requestedCategory
+      : "all";
 
     function applyFilters() {
       const query = search.value.trim().toLocaleLowerCase("ru");
@@ -443,6 +494,8 @@
 
       grid.replaceChildren(...visible.map((product) => createProductCard(product, { quickView: true })));
       empty.hidden = visible.length > 0;
+      const itemWord = { one: "товар", few: "товара", many: "товаров", other: "товаров" }[russianPluralRules.select(visible.length)];
+      resultCount.textContent = `${visible.length} ${itemWord}.`;
       renderFavorites();
     }
 
@@ -455,7 +508,21 @@
       });
       applyFilters();
     }));
-    search.addEventListener("input", applyFilters);
+    tabs.forEach((tab) => {
+      const selected = tab.dataset.category === activeCategory;
+      tab.classList.toggle("is-active", selected);
+      tab.setAttribute("aria-pressed", String(selected));
+    });
+    function updateSearch() {
+      clearSearch.hidden = search.value.length === 0;
+      applyFilters();
+    }
+    search.addEventListener("input", updateSearch);
+    clearSearch.addEventListener("click", () => {
+      search.value = "";
+      updateSearch();
+      search.focus();
+    });
     sort.addEventListener("change", applyFilters);
     applyFilters();
   }
@@ -480,6 +547,18 @@
     });
     document.addEventListener("keydown", (event) => {
       if (event.key === "Escape") close();
+    });
+  }
+
+  function setupKeyboardShortcuts() {
+    document.addEventListener("keydown", (event) => {
+      if (event.key !== "/" || event.ctrlKey || event.metaKey || event.altKey) return;
+      if (event.target instanceof Element &&
+          event.target.closest("input, textarea, select, [contenteditable='true']")) return;
+      const search = document.querySelector("#menu-search");
+      if (!search || document.querySelector(".product-dialog[open]") || document.querySelector(".cart-drawer.is-open")) return;
+      event.preventDefault();
+      search.focus();
     });
   }
 
@@ -604,28 +683,19 @@
   async function shareProduct(product) {
     const url = new URL("menu.html", window.location.href);
     url.searchParams.set("product", product.id);
-    try {
-      if (navigator.share) {
+    if (navigator.share) {
+      try {
         await navigator.share({ title: product.name, text: product.description, url: url.href });
         return;
+      } catch (error) {
+        if (error instanceof DOMException && error.name === "AbortError") return;
+        console.warn("Web Share недоступен; копируем ссылку.", error);
       }
-      if (navigator.clipboard?.writeText) {
-        await navigator.clipboard.writeText(url.href);
-      } else {
-        const input = document.createElement("textarea");
-        input.value = url.href;
-        input.setAttribute("readonly", "");
-        input.style.position = "fixed";
-        input.style.opacity = "0";
-        document.body.append(input);
-        input.select();
-        const copied = document.execCommand("copy");
-        input.remove();
-        if (!copied) throw new Error("Копирование ссылки не удалось.");
-      }
+    }
+    try {
+      await copyText(url.href);
       showToast("Ссылка на товар скопирована.");
     } catch (error) {
-      if (error.name === "AbortError") return;
       showToast("Не удалось поделиться ссылкой.");
       console.error("Не удалось поделиться товаром.", error);
     }
@@ -765,7 +835,22 @@
       return;
     }
     const quantity = event.target.closest("[data-cart-action]");
-    if (quantity) updateCart({ id: quantity.dataset.productId, amount: quantity.dataset.cartAction === "increase" ? 1 : -1 });
+    if (quantity) {
+      const { productId, cartAction } = quantity.dataset;
+      const product = productById.get(productId);
+      if (!product) return;
+      const removing = cartAction === "decrease" && cart.get(productId) === 1;
+      updateCart({ id: productId, amount: cartAction === "increase" ? 1 : -1 });
+      if (removing) {
+        cartUI.drawer.querySelector(".cart-close").focus();
+        showToast(`${product.name} удалён из корзины.`);
+      } else {
+        showToast(`${product.name}: ${cartAction === "increase" ? "количество увеличено" : "количество уменьшено"}.`);
+        if (cartAction === "decrease") {
+          cartUI.drawer.querySelector(`[data-cart-action="decrease"][data-product-id="${productId}"]`)?.focus();
+        }
+      }
+    }
   });
 
   document.addEventListener("kroshka:cart-cleared", () => {
@@ -776,6 +861,7 @@
   restoreCart();
   loadUserLists();
   setupNavigation();
+  setupKeyboardShortcuts();
   setupTheme();
   setupOpenStatus();
   renderProductLists();

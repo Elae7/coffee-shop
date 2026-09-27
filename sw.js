@@ -1,4 +1,4 @@
-const CACHE_NAME = "kroshka-shell-v3";
+const CACHE_NAME = "kroshka-shell-v5";
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -7,11 +7,16 @@ const APP_SHELL = [
   "./about.html",
   "./visit.html",
   "./order.html",
+  "./account.html",
+  "./docs.html",
   "./404.html",
   "./style.css",
   "./menu-data.js",
+  "./order-config.js",
   "./js_main1.js",
   "./order.js",
+  "./account-db.js",
+  "./account.js",
   "./manifest.json",
   "./assets/icons/kroshka.svg",
   "./assets/icons/kroshka-180.png",

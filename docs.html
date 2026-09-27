@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f7f1e7">
+    <meta name="description" content="Документация и руководство по сайту Крошка: меню, избранное, корзина, локальный профиль, демо-заказ и офлайн-режим.">
+    <title>Документация и помощь — Крошка</title>
+    <link rel="canonical" href="https://elae7.github.io/coffee-shop/docs.html">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="assets/icons/kroshka.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="assets/icons/kroshka-180.png">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Крошка">
+    <meta property="og:title" content="Документация и помощь — Крошка">
+    <meta property="og:description" content="Как пользоваться меню, корзиной, локальным профилем и демо-оформлением.">
+    <meta property="og:url" content="https://elae7.github.io/coffee-shop/docs.html">
+    <meta property="og:image" content="https://elae7.github.io/coffee-shop/assets/images/croissant-coffee.webp">
+    <meta property="og:image:alt" content="Круассан и кофе на завтрак">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="menu-data.js" defer></script>
+    <script src="js_main1.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Перейти к содержимому</a>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Крошка — на главную"><span class="brand-mark" aria-hidden="true">к</span><span>крошка<span class="brand-period">.</span></span></a>
+      <nav class="main-nav" id="main-navigation" aria-label="Основная навигация">
+        <a href="index.html">Главная</a><a href="menu.html">Меню</a>
+        <a href="favorites.html">Избранное <span class="favorites-count" aria-label="Избранных товаров: 0">0</span></a>
+        <a href="account.html">Профиль</a><a href="about.html">О нас</a><a href="visit.html">Как найти</a>
+      </nav>
+      <div class="header-actions"><button class="cart-toggle header-cart" type="button" aria-label="Открыть корзину">Корзина <span class="header-cart-count">0</span></button><button class="theme-toggle icon-button" type="button" aria-label="Сменить тему" title="Сменить тему"><span aria-hidden="true">☾</span></button><button class="nav-toggle icon-button" type="button" aria-label="Открыть навигацию" aria-controls="main-navigation" aria-expanded="false"><span aria-hidden="true">☰</span></button></div>
+    </header>
+    <main id="main-content" class="page-main">
+      <section class="page-intro">
+        <p class="eyebrow"><span class="eyebrow-dot"></span> СПРАВОЧНИК И ПРАВИЛА</p>
+        <h1>Документация <span>Крошки.</span></h1>
+        <p>Короткое руководство по возможностям сайта, локальным данным, приватности и границам демо-оформления.</p>
+      </section>
+      <section class="docs-layout section-wrap">
+        <nav class="docs-index" aria-label="Содержание документации">
+          <p class="eyebrow">СОДЕРЖАНИЕ</p>
+          <a href="#getting-started">Начало работы</a>
+          <a href="#shopping">Меню и корзина</a>
+          <a href="#profile-data">Профиль и база данных</a>
+          <a href="#demo-checkout">Демо-заказ</a>
+          <a href="#offline-privacy">Офлайн и приватность</a>
+          <a href="#project-info">Сведения о проекте</a>
+        </nav>
+        <div class="docs-content">
+          <section class="docs-article" id="getting-started">
+            <p class="eyebrow">01 · ОСНОВЫ</p><h2>Начало работы</h2>
+            <p>«Крошка» — многостраничный статический сайт кофейни-пекарни. Откройте <a href="menu.html">меню</a>, чтобы посмотреть выпечку, напитки и завтраки. На карточках доступны быстрое описание, добавление в корзину и избранное.</p>
+            <div class="docs-callout"><strong>Подсказка.</strong> Нажмите <kbd>/</kbd> на странице меню, чтобы сразу перейти к поиску. Нажмите <kbd>Esc</kbd>, чтобы закрыть корзину или окно быстрого просмотра.</div>
+          </section>
+          <section class="docs-article" id="shopping">
+            <p class="eyebrow">02 · ПОКУПКИ</p><h2>Меню, избранное и корзина</h2>
+            <p>Ищите товары по названию, выбирайте категорию и порядок сортировки. Сердце на карточке сохраняет товар в избранном, а быстрый просмотр открывает подробности без перехода на другую страницу.</p>
+            <p>Корзина сохраняется в этом браузере. Меняйте количество кнопками «−» и «+», удаляйте позиции и переходите к оформлению. Избранное и недавно просмотренные товары тоже остаются только на этом устройстве. Создавать профиль для этих функций не нужно.</p>
+          </section>
+          <section class="docs-article" id="profile-data">
+            <p class="eyebrow">03 · ПРОФИЛЬ</p><h2>Профиль и локальная база</h2>
+            <p>Страница <a href="account.html">«Профиль»</a> позволяет сохранить имя, почту, телефон, день рождения и любимую категорию. Номер телефона подставляется в форму демо-заказа. Данные записываются в IndexedDB — локальную базу браузера данного устройства и домена.</p>
+            <p><strong>Это не настоящая регистрация:</strong> у профиля нет пароля, серверной проверки личности, восстановления доступа или синхронизации. Другой браузер или устройство не увидит профиль. Не вносите пароли и платёжные данные. Люди, имеющие доступ к устройству и профилю браузера, потенциально могут увидеть локальные данные. Профиль сам по себе не отправляется; при отдельно настроенной отправке заказа имя и телефон из checkout передаются Formspree только после согласия в форме.</p>
+            <p>Удалите профиль или историю заказов на странице профиля. Для полного сброса корзины и избранного используйте настройки данных сайтов в браузере. Удаление данных браузера также удалит локальную базу.</p>
+          </section>
+          <section class="docs-article" id="demo-checkout">
+            <p class="eyebrow">04 · ОФОРМЛЕНИЕ</p><h2>Демо-заказ и его статусы</h2>
+            <p>Оформление создаёт локальный демонстрационный номер заказа и сохраняет историю на устройстве. В этом проекте заказ <strong>не попадает в кофейню</strong>, оплата не производится, а статус «Готов» можно поставить только вручную для демонстрации.</p>
+            <p>Корзина очищается после успешного локального демо-оформления. Демо-заказ и его статус доступны в <a href="account.html">истории профиля</a> и на странице оформления.</p>
+          </section>
+          <section class="docs-article" id="offline-privacy">
+            <p class="eyebrow">05 · УСТРОЙСТВО</p><h2>Офлайн-режим и приватность</h2>
+            <p>После первого посещения Service Worker может открывать закэшированные страницы без сети. IndexedDB и localStorage зависят от настроек браузера, режима приватного просмотра и свободного места; очистка данных сайта удалит локальные корзину, избранное, профиль и историю.</p>
+            <p>Сайт не подключён к пользовательской базе, аналитике или платежам. Для настоящих аккаунтов и общей истории заказов потребуется отдельный сервер, аутентификация, политика хранения данных и правила доступа. Одной статической публикации на GitHub Pages для этого недостаточно.</p>
+          </section>
+          <section class="docs-article" id="project-info">
+            <p class="eyebrow">06 · О ПРОЕКТЕ</p><h2>Разработчикам и владельцам</h2>
+            <p>Полная инструкция по запуску, ресурсам, настройке PWA и структуре файлов находится в <a href="README.md">README проекта</a>. Каталог товаров задаётся в <code>menu-data.js</code>; оформление — в <code>style.css</code>; приложение состоит из обычных HTML и JavaScript-файлов и не требует сборки.</p>
+            <p>Вопросы по адресу, часам работы и самовывозу описаны на странице <a href="visit.html">«Как найти»</a>. Используйте только подтверждённые данные проекта, не вводите в интерфейс вымышленные контакты или условия заказа.</p>
+          </section>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer"><a class="brand footer-brand" href="index.html"><span class="brand-mark" aria-hidden="true">к</span><span>крошка<span class="brand-period">.</span></span></a><p>Тепло в каждом кусочке.</p><nav aria-label="Документация и страницы"><a href="menu.html">Меню</a><a href="account.html">Профиль</a><a href="docs.html">Документация</a><a href="about.html">О нас</a><a href="visit.html">Как найти</a></nav><span>© <span class="current-year">2026</span> Крошка</span></footer>
+    <nav class="mobile-dock" aria-label="Быстрая навигация"><a href="index.html"><span aria-hidden="true">⌂</span><span>Главная</span></a><a href="menu.html"><span aria-hidden="true">☷</span><span>Меню</span></a><a href="favorites.html"><span aria-hidden="true">♡</span><span>Избранное</span></a><a href="account.html"><span aria-hidden="true">☺</span><span>Профиль</span></a><button class="cart-toggle" type="button" aria-label="Открыть корзину"><span aria-hidden="true">🛒</span><span>Корзина</span></button></nav>
+  </body>
+</html>
